@@ -5,10 +5,9 @@ build/
 # Compiled class files
 *.class
 
-# Build artifacts (keep releases/ and the gradle wrapper jar)
+# Build artifacts
 *.jar
 !gradle/wrapper/*.jar
-!releases/*.jar
 
 # IDE
 .idea/

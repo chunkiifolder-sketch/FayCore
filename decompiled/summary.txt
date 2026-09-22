@@ -1,9 +1,0 @@
-Summary for FayCore-1.1.0-beta.1.jar
-Decompiled with CFR 0.152
-
-
-net.mcreator.faycore.client.gui.OneCmdManagerScreen
-----------------------------
-
-compileAndExportGiantCommand()
-  Unable to fully structure code

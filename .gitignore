@@ -3,8 +3,12 @@
 build/
 faycore-dev/build/
 
-# Compiled class files
+# Compiled / binary artifacts
 *.class
+*.jar
+
+# Derived / generated source (decompiled)
+decompiled/
 
 # IDE
 .idea/
