@@ -1,0 +1,24 @@
+{
+  "required": true,
+  "package": "net.mcreator.faycore.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "refmap": "faycore.refmap.json",
+  "mixins": [
+    "LivingEntityMixin",
+    "PlayerMixin",
+    "ItemStackMixin",
+    "BlockItemMixin",
+    "BoneMealItemMixin",
+    "CommandsMixin",
+    "ExperienceOrbMixin",
+    "EditBoxMixin",
+    "MouseHandlerMixin"
+  ],
+  "client": [
+    "EditBoxMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8.4"
+}

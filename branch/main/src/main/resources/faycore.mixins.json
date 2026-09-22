@@ -1,0 +1,40 @@
+{
+  "required": true,
+  "package": "chunk.faye.mod_tog.faycore.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "refmap": "faycore.refmap.json",
+  "mixins": [
+    "ArmorStandProtectionMixin",
+    "BoneMealItemMixin",
+    "BossBarProtectionMixin",
+    "ChatProtectionMixin",
+    "CommandsMixin",
+    "CustomClient",
+    "DialogProtectionMixin",
+    "DimensionChangeMixin",
+    "EditBoxMixin",
+    "EntityRemoveProtectionMixin",
+    "EntityRenderProtectionMixin",
+    "EntitySpawnProtectionMixin",
+    "ExperienceOrbMixin",
+    "ItemStackMixin",
+    "LivingEntityRendererMixin",
+    "MixinDataComponentPatch",
+    "MixinFormattedText",
+    "MixinItemStackTooltip",
+    "MixinStyle",
+    "MixinTranslatableContents",
+    "MouseHandlerMixin",
+    "PlayerMixin",
+    "ScreenOverrideMixin",
+    "TitleProtectionMixin"
+  ],
+  "client": [
+    "ClientboundBossEventPacketAccessor",
+    "EditBoxMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8.4"
+}

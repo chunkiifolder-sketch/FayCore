@@ -1,0 +1,27 @@
+# Gradle
+.gradle/
+build/
+
+# Compiled class files
+*.class
+
+# Build artifacts (keep releases/ and the gradle wrapper jar)
+*.jar
+!gradle/wrapper/*.jar
+!releases/*.jar
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.ipr
+*.iws
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Minecraft run output
+run/
+logs/
+*.log

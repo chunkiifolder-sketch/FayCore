@@ -1,0 +1,33 @@
+# Gradle
+.gradle/
+build/
+faycore-dev/build/
+
+# Compiled class files
+*.class
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.ipr
+*.iws
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Minecraft run output
+run/
+logs/
+*.log
+
+# Temporary / scratch
+tools/
+rename/
+rejar/
+deps/
+classes/
+minecraft-stripped.jar
+manifest.json
+26.1.2.json

@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "faycore",
+  "version": "1.0.0",
+  "name": "FayCore",
+  "authors": [
+    "FayeCruz",
+    "Chunkiifolder"
+  ],
+  "contact": {
+    "homepage": "",
+    "sources": ""
+  },
+  "license": "Not specified",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.mcreator.faycore.FaycoreMod"
+    ],
+    "client": [
+      "net.mcreator.faycore.FaycoreModClient"
+    ]
+  },
+  "mixins": [
+    "faycore.mixins.json"
+  ],
+  "accessWidener": "META-INF/faycore.classtweaker",
+  "depends": {
+    "fabricloader": ">=0.19.3",
+    "minecraft": "~26.1.2",
+    "java": ">=25",
+    "fabric-api": "*"
+  }
+}
