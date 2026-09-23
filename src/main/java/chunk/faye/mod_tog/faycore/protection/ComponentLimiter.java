@@ -1,47 +1,40 @@
-/*
- * Decompiled with CFR 0.152.
- * 
- * Could not load the following classes:
- *  net.minecraft.network.chat.Component
- *  net.minecraft.world.item.ItemStack
- */
 package chunk.faye.mod_tog.faycore.protection;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 
 public final class ComponentLimiter {
-    private ComponentLimiter() {
-    }
+   private ComponentLimiter() {
+   }
 
-    public static boolean safe(ItemStack stack) {
-        try {
-            if (stack == null || stack.isEmpty()) {
-                return true;
-            }
+   public static boolean safe(ItemStack stack) {
+      try {
+         if (stack != null && !stack.isEmpty()) {
             String text = stack.getHoverName().getString();
             if (text.length() > 256) {
-                return false;
+               return false;
+            } else {
+               String all = stack.getComponents().toString();
+               return all.length() <= 4096;
             }
-            String all = stack.getComponents().toString();
-            return all.length() <= 4096;
-        }
-        catch (Throwable e) {
-            return false;
-        }
-    }
+         } else {
+            return true;
+         }
+      } catch (Throwable var3) {
+         return false;
+      }
+   }
 
-    public static boolean safe(Component component) {
-        try {
-            if (component == null) {
-                return true;
-            }
+   public static boolean safe(Component component) {
+      try {
+         if (component == null) {
+            return true;
+         } else {
             String text = component.getString();
             return text.length() <= 2048;
-        }
-        catch (Throwable e) {
-            return false;
-        }
-    }
+         }
+      } catch (Throwable var2) {
+         return false;
+      }
+   }
 }
-

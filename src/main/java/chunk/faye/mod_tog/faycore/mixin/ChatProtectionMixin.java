@@ -1,15 +1,3 @@
-/*
- * Decompiled with CFR 0.152.
- * 
- * Could not load the following classes:
- *  net.minecraft.client.multiplayer.ClientPacketListener
- *  net.minecraft.network.chat.Component
- *  net.minecraft.network.protocol.game.ClientboundSystemChatPacket
- *  org.spongepowered.asm.mixin.Mixin
- *  org.spongepowered.asm.mixin.injection.At
- *  org.spongepowered.asm.mixin.injection.Inject
- *  org.spongepowered.asm.mixin.injection.callback.CallbackInfo
- */
 package chunk.faye.mod_tog.faycore.mixin;
 
 import chunk.faye.mod_tog.faycore.config.CrashProtectionConfig;
@@ -22,22 +10,23 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(value={ClientPacketListener.class})
+@Mixin({ClientPacketListener.class})
 public class ChatProtectionMixin {
-    @Inject(method={"handleSystemChat"}, at={@At(value="HEAD")}, cancellable=true)
-    private void faycore$protectSystemChat(ClientboundSystemChatPacket packet, CallbackInfo ci) {
-        if (!CrashProtectionConfig.enableChatLimit) {
-            return;
-        }
-        try {
+   @Inject(
+      method = {"handleSystemChat"},
+      at = {@At("HEAD")},
+      cancellable = true
+   )
+   private void faycore$protectSystemChat(ClientboundSystemChatPacket packet, CallbackInfo ci) {
+      if (CrashProtectionConfig.enableChatLimit) {
+         try {
             Component message = packet.content();
             if (!TextLimiter.check(message, CrashProtectionConfig.maxSystemMessageLength)) {
-                ci.cancel();
+               ci.cancel();
             }
-        }
-        catch (Throwable throwable) {
+         } catch (Throwable var4) {
             ci.cancel();
-        }
-    }
+         }
+      }
+   }
 }
-

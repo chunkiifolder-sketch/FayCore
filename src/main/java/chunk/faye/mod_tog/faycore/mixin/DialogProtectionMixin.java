@@ -1,14 +1,3 @@
-/*
- * Decompiled with CFR 0.152.
- * 
- * Could not load the following classes:
- *  net.minecraft.network.protocol.common.ClientCommonPacketListener
- *  net.minecraft.network.protocol.common.ClientboundShowDialogPacket
- *  org.spongepowered.asm.mixin.Mixin
- *  org.spongepowered.asm.mixin.injection.At
- *  org.spongepowered.asm.mixin.injection.Inject
- *  org.spongepowered.asm.mixin.injection.callback.CallbackInfo
- */
 package chunk.faye.mod_tog.faycore.mixin;
 
 import chunk.faye.mod_tog.faycore.config.CrashProtectionConfig;
@@ -19,14 +8,16 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(value={ClientboundShowDialogPacket.class})
+@Mixin({ClientboundShowDialogPacket.class})
 public class DialogProtectionMixin {
-    @Inject(method={"handle"}, at={@At(value="HEAD")}, cancellable=true)
-    private void faycore$blockDialog(ClientCommonPacketListener listener, CallbackInfo ci) {
-        if (!CrashProtectionConfig.enableDialogLimit) {
-            return;
-        }
-        ci.cancel();
-    }
+   @Inject(
+      method = {"handle"},
+      at = {@At("HEAD")},
+      cancellable = true
+   )
+   private void faycore$blockDialog(ClientCommonPacketListener listener, CallbackInfo ci) {
+      if (CrashProtectionConfig.enableDialogLimit) {
+         ci.cancel();
+      }
+   }
 }
-

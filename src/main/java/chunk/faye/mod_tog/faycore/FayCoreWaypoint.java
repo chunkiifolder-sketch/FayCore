@@ -1,82 +1,70 @@
 package chunk.faye.mod_tog.faycore;
 
+import chunk.faye.mod_tog.faycore.client.gui.FayCoreMacroEngine;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.platform.Window;
 import java.util.ArrayList;
 import java.util.List;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import chunk.faye.mod_tog.faycore.client.gui.FayCoreMacroEngine;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents.EndTick;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import org.lwjgl.glfw.GLFW;
 
-/**
- * FayCore Waypoint
- * Press Y to save your current position as a waypoint.
- * Press U to teleport back to the most recent waypoint.
- */
 public class FayCoreWaypoint {
-    private static final int SET_KEY = GLFW.GLFW_KEY_Y;
-    private static final int TELEPORT_KEY = GLFW.GLFW_KEY_U;
+   private static final int SET_KEY = 89;
+   private static final int TELEPORT_KEY = 85;
+   public static final List<FayCoreWaypoint.Waypoint> waypoints = new ArrayList<>();
+   private static boolean setWasDown = false;
+   private static boolean tpWasDown = false;
 
-    public static final List<Waypoint> waypoints = new ArrayList<Waypoint>();
+   public static void register() {
+      ClientTickEvents.END_CLIENT_TICK.register((EndTick)var0 -> {
+         if (var0.player != null) {
+            if (var0.screen != null) {
+               setWasDown = false;
+               tpWasDown = false;
+            } else {
+               Window var1 = var0.getWindow();
+               boolean var2 = InputConstants.isKeyDown(var1, 89);
+               boolean var3 = InputConstants.isKeyDown(var1, 85);
+               if (var2 && !setWasDown) {
+                  addWaypoint(var0.player);
+               }
 
-    private static boolean setWasDown = false;
-    private static boolean tpWasDown = false;
+               if (var3 && !tpWasDown) {
+                  teleportToLast(var0);
+               }
 
-    public static void register() {
-        ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            if (client.player == null) {
-                return;
+               setWasDown = var2;
+               tpWasDown = var3;
             }
-            if (client.screen != null) {
-                setWasDown = false;
-                tpWasDown = false;
-                return;
-            }
-            Window window = client.getWindow();
-            boolean setDown = InputConstants.isKeyDown(window, SET_KEY);
-            boolean tpDown = InputConstants.isKeyDown(window, TELEPORT_KEY);
+         }
+      });
+   }
 
-            if (setDown && !setWasDown) {
-                addWaypoint(client.player);
-            }
-            if (tpDown && !tpWasDown) {
-                teleportToLast(client);
-            }
-            setWasDown = setDown;
-            tpWasDown = tpDown;
-        });
-    }
+   private static void addWaypoint(LocalPlayer var0) {
+      BlockPos var1 = var0.blockPosition();
+      waypoints.add(new FayCoreWaypoint.Waypoint(var1));
+      var0.sendSystemMessage(Component.literal("§9[FayCore] §fWaypoint #" + (waypoints.size() - 1) + " set at §a" + var1.toShortString()));
+   }
 
-    private static void addWaypoint(LocalPlayer player) {
-        BlockPos pos = player.blockPosition();
-        waypoints.add(new Waypoint(pos));
-        player.sendSystemMessage(Component.literal(
-                "\u00a79[FayCore] \u00a7fWaypoint #" + (waypoints.size() - 1)
-                        + " set at \u00a7a" + pos.toShortString()));
-    }
+   private static void teleportToLast(Minecraft var0) {
+      if (waypoints.isEmpty()) {
+         var0.player.sendSystemMessage(Component.literal("§9[FayCore] §cNo waypoints saved yet."));
+      } else {
+         FayCoreWaypoint.Waypoint var1 = waypoints.get(waypoints.size() - 1);
+         FayCoreMacroEngine.autoFindAndInjectVCommand(var0, "tp %player% " + var1.pos.getX() + " " + var1.pos.getY() + " " + var1.pos.getZ());
+         var0.player.sendSystemMessage(Component.literal("§9[FayCore] §fTeleported to waypoint #" + (waypoints.size() - 1)));
+      }
+   }
 
-    private static void teleportToLast(Minecraft client) {
-        if (waypoints.isEmpty()) {
-            client.player.sendSystemMessage(Component.literal(
-                    "\u00a79[FayCore] \u00a7cNo waypoints saved yet."));
-            return;
-        }
-        Waypoint wp = waypoints.get(waypoints.size() - 1);
-        FayCoreMacroEngine.autoFindAndInjectVCommand(client,
-                "tp %player% " + wp.pos.getX() + " " + wp.pos.getY() + " " + wp.pos.getZ());
-        client.player.sendSystemMessage(Component.literal(
-                "\u00a79[FayCore] \u00a7fTeleported to waypoint #" + (waypoints.size() - 1)));
-    }
+   public static class Waypoint {
+      public final BlockPos pos;
 
-    public static class Waypoint {
-        public final BlockPos pos;
-
-        public Waypoint(BlockPos pos) {
-            this.pos = pos;
-        }
-    }
+      public Waypoint(BlockPos var1) {
+         this.pos = var1;
+      }
+   }
 }

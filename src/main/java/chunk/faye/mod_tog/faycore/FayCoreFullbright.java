@@ -1,44 +1,37 @@
 package chunk.faye.mod_tog.faycore;
 
+import chunk.faye.mod_tog.faycore.client.gui.FayCoreMacroEngine;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.platform.Window;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import chunk.faye.mod_tog.faycore.client.gui.FayCoreMacroEngine;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents.EndTick;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
-import org.lwjgl.glfw.GLFW;
 
-/**
- * FayCore Fullbright
- * Press C to toggle fullbright (infinite night vision via command).
- */
 public class FayCoreFullbright {
-    private static final int TOGGLE_KEY = GLFW.GLFW_KEY_C;
+   private static final int TOGGLE_KEY = 67;
+   public static boolean enabled = false;
+   private static boolean wasDown = false;
 
-    public static boolean enabled = false;
-    private static boolean wasDown = false;
+   public static void register() {
+      ClientTickEvents.END_CLIENT_TICK.register((EndTick)var0 -> {
+         if (var0.player != null) {
+            Window var1 = var0.getWindow();
+            boolean var2 = InputConstants.isKeyDown(var1, 67);
+            if (var2 && !wasDown) {
+               enabled = !enabled;
+               Minecraft var3 = Minecraft.getInstance();
+               if (enabled) {
+                  FayCoreMacroEngine.autoFindAndInjectVCommand(var3, "effect give %player% minecraft:night_vision infinite 0 true");
+               } else {
+                  FayCoreMacroEngine.autoFindAndInjectVCommand(var3, "effect clear %player% minecraft:night_vision");
+               }
 
-    public static void register() {
-        ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            if (client.player == null) {
-                return;
+               var0.player.sendSystemMessage(Component.literal("§9[FayCore] §fFullbright: " + (enabled ? "§aON" : "§cOFF")));
             }
-            Window window = client.getWindow();
-            boolean down = InputConstants.isKeyDown(window, TOGGLE_KEY);
-            if (down && !wasDown) {
-                enabled = !enabled;
-                Minecraft mc = Minecraft.getInstance();
-                if (enabled) {
-                    FayCoreMacroEngine.autoFindAndInjectVCommand(mc,
-                            "effect give %player% minecraft:night_vision infinite 0 true");
-                } else {
-                    FayCoreMacroEngine.autoFindAndInjectVCommand(mc,
-                            "effect clear %player% minecraft:night_vision");
-                }
-                client.player.sendSystemMessage(Component.literal(
-                        "\u00a79[FayCore] \u00a7fFullbright: " + (enabled ? "\u00a7aON" : "\u00a7cOFF")));
-            }
-            wasDown = down;
-        });
-    }
+
+            wasDown = var2;
+         }
+      });
+   }
 }

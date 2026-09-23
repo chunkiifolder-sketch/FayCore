@@ -1,34 +1,30 @@
-/*
- * Decompiled with CFR 0.152.
- */
 package chunk.faye.mod_tog.faycore.protection;
 
 import chunk.faye.mod_tog.faycore.config.CrashProtectionConfig;
 
 public final class PacketLimiter {
-    private static long lastPacketTime = 0L;
-    private static int packetCount = 0;
+   private static long lastPacketTime = 0L;
+   private static int packetCount = 0;
 
-    private PacketLimiter() {
-    }
+   private PacketLimiter() {
+   }
 
-    public static boolean allowPacket() {
-        if (!CrashProtectionConfig.enablePacketLimit) {
-            return true;
-        }
-        long now = System.currentTimeMillis();
-        if (now - lastPacketTime > 1000L) {
+   public static boolean allowPacket() {
+      if (!CrashProtectionConfig.enablePacketLimit) {
+         return true;
+      } else {
+         long now = System.currentTimeMillis();
+         if (now - lastPacketTime > 1000L) {
             lastPacketTime = now;
             packetCount = 0;
-        }
-        return ++packetCount <= CrashProtectionConfig.maxPacketsPerSecond;
-    }
+         }
 
-    public static boolean allowText(String text) {
-        if (text == null) {
-            return true;
-        }
-        return text.length() <= CrashProtectionConfig.maxChatLength;
-    }
+         packetCount++;
+         return packetCount <= CrashProtectionConfig.maxPacketsPerSecond;
+      }
+   }
+
+   public static boolean allowText(String text) {
+      return text == null ? true : text.length() <= CrashProtectionConfig.maxChatLength;
+   }
 }
-

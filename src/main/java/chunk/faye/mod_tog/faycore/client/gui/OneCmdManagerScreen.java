@@ -1,7 +1,5 @@
 package chunk.faye.mod_tog.faycore.client.gui;
 
-import chunk.faye.mod_tog.faycore.client.gui.OneCmdManagerScreen.CommandEntryData;
-import chunk.faye.mod_tog.faycore.client.gui.OneCmdManagerScreen.PageSaveData;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.File;
@@ -34,7 +32,7 @@ public class OneCmdManagerScreen extends Screen {
    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
    private int currentPage = 1;
    private final int maxPages = 20;
-   private final List<CommandEntryData> commandDataList = new ArrayList<>();
+   private final List<OneCmdManagerScreen.CommandEntryData> commandDataList = new ArrayList<>();
    private int scrollStartIndex = 0;
    private Button buttonDirection;
    private Button buttonAdd;
@@ -79,7 +77,7 @@ public class OneCmdManagerScreen extends Screen {
       File file = this.getPageFile(this.currentPage);
       if (file.exists()) {
          try (FileReader reader = new FileReader(file)) {
-            PageSaveData loadedData = (PageSaveData)GSON.fromJson(reader, PageSaveData.class);
+            OneCmdManagerScreen.PageSaveData loadedData = (OneCmdManagerScreen.PageSaveData)GSON.fromJson(reader, OneCmdManagerScreen.PageSaveData.class);
             if (loadedData != null) {
                this.directionMode = loadedData.savedDirectionMode;
                if (loadedData.savedCommands != null) {
@@ -92,7 +90,7 @@ public class OneCmdManagerScreen extends Screen {
       }
 
       if (this.commandDataList.isEmpty()) {
-         this.commandDataList.add(new CommandEntryData("say Hello", 0));
+         this.commandDataList.add(new OneCmdManagerScreen.CommandEntryData("say Hello", 0));
       }
    }
 
@@ -100,7 +98,7 @@ public class OneCmdManagerScreen extends Screen {
       File file = this.getPageFile(this.currentPage);
 
       try (FileWriter writer = new FileWriter(file)) {
-         PageSaveData dataToSave = new PageSaveData(this.directionMode, this.commandDataList);
+         OneCmdManagerScreen.PageSaveData dataToSave = new OneCmdManagerScreen.PageSaveData(this.directionMode, this.commandDataList);
          GSON.toJson(dataToSave, writer);
       } catch (Exception var7) {
          var7.printStackTrace();
@@ -114,7 +112,7 @@ public class OneCmdManagerScreen extends Screen {
       int validCommandCount = 0;
       boolean isContinuationOfLoop = false;
 
-      for (CommandEntryData data : this.commandDataList) {
+      for (OneCmdManagerScreen.CommandEntryData data : this.commandDataList) {
          String rawCmd = data.commandText;
          if (rawCmd != null && !rawCmd.trim().isEmpty()) {
             validCommandCount++;
@@ -557,7 +555,7 @@ public class OneCmdManagerScreen extends Screen {
          this.refreshList();
       }).bounds(this.width / 2 - 250, this.height - 35, 50, 20).build();
       this.buttonAdd = Button.builder(Component.literal("＋ Add"), btn -> {
-         this.commandDataList.add(new CommandEntryData("", 0));
+         this.commandDataList.add(new OneCmdManagerScreen.CommandEntryData("", 0));
          if (this.commandDataList.size() > 4) {
             this.scrollStartIndex = this.commandDataList.size() - 4;
          }
@@ -708,7 +706,7 @@ public class OneCmdManagerScreen extends Screen {
 
       for (int i = this.scrollStartIndex; i < endIndex; i++) {
          int index = i;
-         CommandEntryData data = this.commandDataList.get(index);
+         OneCmdManagerScreen.CommandEntryData data = this.commandDataList.get(index);
          int currentY = startY + renderRowIndex * 34;
          renderRowIndex++;
          String[] modeNames = new String[]{"§7[Once]", "§9[Repeat]", "§3[Chain]", "§3[§7@§3Chain]", "§6[Normal]"};
@@ -850,5 +848,25 @@ public class OneCmdManagerScreen extends Screen {
 
    public boolean isPauseScreen() {
       return false;
+   }
+
+   public static class CommandEntryData {
+      public String commandText;
+      public int mode;
+
+      public CommandEntryData(String text, int mode) {
+         this.commandText = text;
+         this.mode = mode;
+      }
+   }
+
+   public static class PageSaveData {
+      public int savedDirectionMode;
+      public List<OneCmdManagerScreen.CommandEntryData> savedCommands;
+
+      public PageSaveData(int directionMode, List<OneCmdManagerScreen.CommandEntryData> commands) {
+         this.savedDirectionMode = directionMode;
+         this.savedCommands = commands;
+      }
    }
 }
