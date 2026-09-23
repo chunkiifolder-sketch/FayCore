@@ -225,20 +225,21 @@ public class FayCoreMacroEngine {
                            BlockPos targetPos = findNextEmptyBlock(mc, g, minX, maxX, minY, maxY, minZ, maxZ);
                            if (targetPos == null) {
                               coreFull[g] = true;
+                              final int group = g;
                               FAYCORE_ASYNC_POOL.execute(() -> {
                                  try {
-                                    if (matrixOwnedBlocksCache != null && matrixOwnedBlocksCache.get(g) != null) {
-                                       matrixOwnedBlocksCache.get(g).clear();
+                                    if (matrixOwnedBlocksCache != null && matrixOwnedBlocksCache.get(group) != null) {
+                                       matrixOwnedBlocksCache.get(group).clear();
                                     }
 
                                     mc.execute(() -> {
                                        if (mc.player != null && mc.player.connection != null) {
-                                          nextSearchIndex[g] = 0;
-                                          matrixRunningIndices.set(g, 0);
-                                          matrixTickCooldowns.set(g, 0);
-                                          matrixPulseStates.set(g, false);
+                                          nextSearchIndex[group] = 0;
+                                          matrixRunningIndices.set(group, 0);
+                                          matrixTickCooldowns.set(group, 0);
+                                          matrixPulseStates.set(group, false);
                                           selectedGroupIndex = 0;
-                                          coreFull[g] = false;
+                                          coreFull[group] = false;
                                        }
                                     });
                                  } catch (Exception var3x) {
