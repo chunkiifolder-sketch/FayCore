@@ -6,6 +6,7 @@ faycore-dev/build/
 # Compiled / binary artifacts
 *.class
 *.jar
+!gradle/wrapper/gradle-wrapper.jar
 
 # Derived / generated source (decompiled)
 decompiled/
