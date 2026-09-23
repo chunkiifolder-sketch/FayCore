@@ -8,13 +8,13 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin({Player.class})
-public abstract class PlayerMixin extends Player {
+public abstract class PlayerMixin {
    @Inject(
       method = {"tick()V"},
       at = {@At("TAIL")}
    )
    public void tick(CallbackInfo ci) {
-      ((PlayerEvents.TickEnd)PlayerEvents.END_PLAYER_TICK.invoker()).onEndTick((Player)this);
+      ((PlayerEvents.TickEnd)PlayerEvents.END_PLAYER_TICK.invoker()).onEndTick((Player)(Object)this);
    }
 
    @Inject(
@@ -22,7 +22,7 @@ public abstract class PlayerMixin extends Player {
       at = {@At("HEAD")}
    )
    public void giveExperiencePoints(int amount, CallbackInfo ci) {
-      ((PlayerEvents.XPChange)PlayerEvents.XP_CHANGE.invoker()).onXpChange((Player)this, amount);
+      ((PlayerEvents.XPChange)PlayerEvents.XP_CHANGE.invoker()).onXpChange((Player)(Object)this, amount);
    }
 
    @Inject(
@@ -30,6 +30,6 @@ public abstract class PlayerMixin extends Player {
       at = {@At("HEAD")}
    )
    public void giveExperienceLevels(int amount, CallbackInfo ci) {
-      ((PlayerEvents.LevelChange)PlayerEvents.LEVEL_CHANGE.invoker()).onLevelChange((Player)this, amount);
+      ((PlayerEvents.LevelChange)PlayerEvents.LEVEL_CHANGE.invoker()).onLevelChange((Player)(Object)this, amount);
    }
 }

@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin({LivingEntity.class})
-public abstract class LivingEntityMixin extends LivingEntity {
+public abstract class LivingEntityMixin {
    @Shadow
    protected int lastHurtByPlayerMemoryTime;
 
@@ -31,7 +31,7 @@ public abstract class LivingEntityMixin extends LivingEntity {
       at = {@At("HEAD")}
    )
    public void swing(InteractionHand hand, boolean updateSelf, CallbackInfo ci) {
-      ItemStack stack = ((LivingEntity)this).getItemInHand(hand);
+      ItemStack stack = ((LivingEntity)(Object)this).getItemInHand(hand);
       if (!stack.isEmpty()) {
       }
    }
@@ -41,7 +41,7 @@ public abstract class LivingEntityMixin extends LivingEntity {
       at = {@At("HEAD")}
    )
    public void startUsingItem(InteractionHand hand, CallbackInfo ci) {
-      LivingEntity entity = (LivingEntity)this;
+      LivingEntity entity = (LivingEntity)(Object)this;
       ItemStack stack = entity.getItemInHand(hand);
       if (!stack.isEmpty() && !entity.isUsingItem()) {
          ((LivingEntityEvents.StartUseItem)LivingEntityEvents.START_USE_ITEM.invoker()).onStartUseItem(entity, stack);
@@ -54,7 +54,7 @@ public abstract class LivingEntityMixin extends LivingEntity {
       cancellable = true
    )
    public void heal(float amount, CallbackInfo ci) {
-      if (!((LivingEntityEvents.EntityHeal)LivingEntityEvents.ENTITY_HEAL.invoker()).onEntityHeal((LivingEntity)this, amount)) {
+      if (!((LivingEntityEvents.EntityHeal)LivingEntityEvents.ENTITY_HEAL.invoker()).onEntityHeal((LivingEntity)(Object)this, amount)) {
          ci.cancel();
       }
    }
@@ -65,7 +65,7 @@ public abstract class LivingEntityMixin extends LivingEntity {
       cancellable = true
    )
    public void applyItemBlocking(ServerLevel serverLevel, DamageSource damageSource, float f, CallbackInfoReturnable<Float> cir) {
-      if (!((LivingEntityEvents.EntityBlock)LivingEntityEvents.ENTITY_BLOCK.invoker()).onEntityBlock((LivingEntity)this, damageSource, (double)f)) {
+      if (!((LivingEntityEvents.EntityBlock)LivingEntityEvents.ENTITY_BLOCK.invoker()).onEntityBlock((LivingEntity)(Object)this, damageSource, (double)f)) {
          cir.cancel();
       }
    }
@@ -76,7 +76,7 @@ public abstract class LivingEntityMixin extends LivingEntity {
       cancellable = true
    )
    public void dropExperience(ServerLevel serverLevel, Entity entity, CallbackInfo ci) {
-      LivingEntity self = (LivingEntity)this;
+      LivingEntity self = (LivingEntity)(Object)this;
       if (!self.wasExperienceConsumed()
          && (
             this.isAlwaysExperienceDropper()
@@ -94,7 +94,7 @@ public abstract class LivingEntityMixin extends LivingEntity {
       cancellable = true
    )
    public void causeFallDamage(double d, float f, DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
-      if (!((LivingEntityEvents.EntityFall)LivingEntityEvents.ENTITY_FALL.invoker()).onEntityFall((LivingEntity)this, d, (double)f)) {
+      if (!((LivingEntityEvents.EntityFall)LivingEntityEvents.ENTITY_FALL.invoker()).onEntityFall((LivingEntity)(Object)this, d, (double)f)) {
          cir.setReturnValue(false);
       }
    }
@@ -112,7 +112,7 @@ public abstract class LivingEntityMixin extends LivingEntity {
       at = {@At("TAIL")}
    )
    public void jumpFromGround(CallbackInfo ci) {
-      ((LivingEntityEvents.EntityJump)LivingEntityEvents.ENTITY_JUMP.invoker()).onEntityJump((LivingEntity)this);
+      ((LivingEntityEvents.EntityJump)LivingEntityEvents.ENTITY_JUMP.invoker()).onEntityJump((LivingEntity)(Object)this);
    }
 
    @Inject(
@@ -120,7 +120,7 @@ public abstract class LivingEntityMixin extends LivingEntity {
       at = {@At("HEAD")}
    )
    public void releaseUsingItem(CallbackInfo ci) {
-      LivingEntity entity = (LivingEntity)this;
+      LivingEntity entity = (LivingEntity)(Object)this;
       if (!entity.getUseItem().isEmpty()) {
          ((LivingEntityEvents.EntityStopUsingItem)LivingEntityEvents.ENTITY_STOP_USING_ITEM.invoker())
             .onStopUsingItem(entity, entity.getUseItem(), entity.getUseItemRemainingTicks());

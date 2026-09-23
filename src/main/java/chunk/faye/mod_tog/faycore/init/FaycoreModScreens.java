@@ -32,6 +32,23 @@ public class FaycoreModScreens {
       protected boolean drawString;
       private final DecimalFormat format;
 
+      private static final java.lang.reflect.Method GET_SPRITE;
+      private static final java.lang.reflect.Method GET_HANDLE_SPRITE;
+      private static final java.lang.reflect.Field DRAGGING;
+
+      static {
+         try {
+            GET_SPRITE = AbstractSliderButton.class.getDeclaredMethod("getSprite");
+            GET_SPRITE.setAccessible(true);
+            GET_HANDLE_SPRITE = AbstractSliderButton.class.getDeclaredMethod("getHandleSprite");
+            GET_HANDLE_SPRITE.setAccessible(true);
+            DRAGGING = AbstractSliderButton.class.getDeclaredField("dragging");
+            DRAGGING.setAccessible(true);
+         } catch (Exception e) {
+            throw new RuntimeException(e);
+         }
+      }
+
       public ExtendedSlider(
          int x,
          int y,
@@ -171,23 +188,20 @@ public class FaycoreModScreens {
       }
 
       public void extractWidgetRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
-         guiGraphics.blitSprite(
-            RenderPipelines.GUI_TEXTURED, this.getSprite(), this.getX(), this.getY(), this.getWidth(), this.getHeight(), ARGB.white(this.alpha)
-         );
-         guiGraphics.blitSprite(
-            RenderPipelines.GUI_TEXTURED,
-            this.getHandleSprite(),
-            this.getX() + (int)(this.value * (double)(this.width - 8)),
-            this.getY(),
-            8,
-            this.getHeight(),
-            ARGB.white(this.alpha)
-         );
-         int i = this.active ? 16777215 : 10526880;
-         MutableComponent message = this.getMessage().copy().withStyle(style -> style.withColor(i));
-         this.extractScrollingStringOverContents(guiGraphics.textRendererForWidget(this, HoveredTextEffects.NONE), message, 2);
-         if (this.isHovered()) {
-            guiGraphics.requestCursor(this.dragging ? CursorTypes.RESIZE_EW : CursorTypes.POINTING_HAND);
+         try {
+            net.minecraft.resources.Identifier sprite = (net.minecraft.resources.Identifier) GET_SPRITE.invoke(this);
+            net.minecraft.resources.Identifier handleSprite = (net.minecraft.resources.Identifier) GET_HANDLE_SPRITE.invoke(this);
+            boolean dragging = DRAGGING.getBoolean(this);
+            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, sprite, this.getX(), this.getY(), this.getWidth(), this.getHeight(), ARGB.white(this.alpha));
+            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, handleSprite, this.getX() + (int)(this.value * (double)(this.width - 8)), this.getY(), 8, this.getHeight(), ARGB.white(this.alpha));
+            int i = this.active ? 16777215 : 10526880;
+            MutableComponent message = this.getMessage().copy().withStyle(style -> style.withColor(i));
+            this.extractScrollingStringOverContents(guiGraphics.textRendererForWidget(this, HoveredTextEffects.NONE), message, 2);
+            if (this.isHovered()) {
+               guiGraphics.requestCursor(dragging ? CursorTypes.RESIZE_EW : CursorTypes.POINTING_HAND);
+            }
+         } catch (Exception e) {
+            // ignore
          }
       }
    }
