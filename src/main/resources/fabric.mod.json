@@ -24,7 +24,7 @@
   "mixins": [
     "faycore.mixins.json"
   ],
-  "accessWidener": "META-INF/faycore.classtweaker",
+  "accessWidener": "faycore.accesswidener",
   "depends": {
     "fabricloader": ">=0.19.3",
     "minecraft": "~26.1.2",

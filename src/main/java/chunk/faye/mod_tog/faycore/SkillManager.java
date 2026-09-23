@@ -283,7 +283,7 @@ public class SkillManager {
                   case 3: {
                      Vec3 dir = player.getLookAngle();
                      double speed = 2.0;
-                     int power = FLING_POWER;
+                     int flingPower = FLING_POWER;
                      String particleCmd = String.format("particle minecraft:glow %f %f %f 0 0 0 1 5 force @a", endPos.x, endPos.y, endPos.z);
                      FayCoreMacroEngine.autoFindAndInjectVCommand(mc, particleCmd);
                      RandomSource random = RandomSource.create();
@@ -294,15 +294,15 @@ public class SkillManager {
                         endPos.x,
                         endPos.y,
                         endPos.z,
-                        power,
+                        flingPower,
                         mx * 2.0,
                         mz * 2.0
                      );
                      FayCoreMacroEngine.autoFindAndInjectVCommand(mc, mobMotionCmd);
 
-                     for (int x = -power; x <= power; x++) {
-                        for (int y = -power; y <= power; y++) {
-                           for (int zx = -power; zx <= power; zx++) {
+                     for (int x = -flingPower; x <= flingPower; x++) {
+                        for (int y = -flingPower; y <= flingPower; y++) {
+                           for (int zx = -flingPower; zx <= flingPower; zx++) {
                               BlockPos pos = BlockPos.containing(endPos.x + (double)x, endPos.y + (double)y, endPos.z + (double)zx);
                               BlockState state = mc.level.getBlockState(pos);
                               if (!state.is(Blocks.BEDROCK)

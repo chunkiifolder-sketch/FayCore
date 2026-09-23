@@ -474,7 +474,7 @@ public class OneCmdManagerScreen extends Screen {
                      .codec()
                      .parse(NbtOps.INSTANCE, entityDataNbt)
                      .result()
-                     .ifPresent(structuralObject -> commandBlockItem.set(DataComponents.ENTITY_DATA, structuralObject));
+                     .ifPresent(structuralObject -> commandBlockItemx.set(DataComponents.ENTITY_DATA, structuralObject));
                   commandBlockItemx.set(DataComponents.CUSTOM_NAME, Component.literal("§9FayCore One Command").withStyle(style -> style.withItalic(false)));
                   commandBlockItemx.set(
                      DataComponents.LORE,
