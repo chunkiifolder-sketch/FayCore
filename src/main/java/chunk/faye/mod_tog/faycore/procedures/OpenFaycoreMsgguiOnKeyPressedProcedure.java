@@ -1,17 +1,9 @@
 package chunk.faye.mod_tog.faycore.procedures;
 
-import chunk.faye.mod_tog.faycore.client.gui.FayCoreCustomInputScreen;
-import net.minecraft.client.Minecraft;
-
 public class OpenFaycoreMsgguiOnKeyPressedProcedure {
-   public static boolean eventResult = true;
+	public static boolean eventResult = true;
 
-   public static void execute() {
-      Minecraft mc = Minecraft.getInstance();
-      mc.execute(() -> {
-         if (mc.player != null) {
-            mc.setScreen(new FayCoreCustomInputScreen());
-         }
-      });
-   }
+	public static void execute() {
+		net.minecraft.client.Minecraft.getInstance().setScreen(new chunk.faye.mod_tog.faycore.client.gui.FayCoreCustomInputScreen());
+	}
 }
