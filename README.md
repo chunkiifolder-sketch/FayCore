@@ -44,7 +44,7 @@ releases/                                    # built jars
 - Fabric Loader `>=0.19.3`, Fabric API `0.161.0+26.2`
 
 > Note: the Java source in `src/` is a decompiled reconstruction of the compiled mod
-> (no original source exists for 1.1.0-beta.1), so it is provided for reference and editing.
+> (no original source exists for 1.0.0), so it is provided for reference and editing.
 > The ready-to-run build is in `releases/`.
 
 ## Credits
