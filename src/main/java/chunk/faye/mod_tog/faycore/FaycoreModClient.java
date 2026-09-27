@@ -123,8 +123,8 @@ public class FaycoreModClient implements ClientModInitializer {
       ClientTickEvents.END_CLIENT_TICK
          .register(
             (EndTick)client -> {
-               if (client.screen != null) {
-                  String screenName = client.screen.getClass().getSimpleName();
+               if (client.gui.screen() != null) {
+                  String screenName = client.gui.screen().getClass().getSimpleName();
                   if (!screenName.contains("LevelLoading") && !screenName.contains("ReceivingLevel") && !screenName.contains("Terrain")) {
                      loadingTickCounter = 0;
                   } else {
@@ -193,7 +193,7 @@ public class FaycoreModClient implements ClientModInitializer {
                   if (mc.player != null) {
                      FayCoreInvseeManager.targetPlayerName = targetName;
                      mc.player.sendSystemMessage(Component.literal("§9[FayCore] §7Invsee target: §3" + targetName));
-                     mc.setScreen(new FayCoreInvseeScreen());
+                     mc.setScreenAndShow(new FayCoreInvseeScreen());
                   }
                });
             }
@@ -212,7 +212,7 @@ public class FaycoreModClient implements ClientModInitializer {
                mc.execute(() -> {
                   if (mc.player != null) {
                      mc.player.sendSystemMessage(Component.literal("§9[FayCore] §3Open Macro gui..."));
-                     mc.setScreen(new FayCoreMacroScreen());
+                     mc.setScreenAndShow(new FayCoreMacroScreen());
                   }
                });
                return false;
@@ -221,7 +221,7 @@ public class FaycoreModClient implements ClientModInitializer {
                mc.execute(() -> {
                   if (mc.player != null) {
                      mc.player.sendSystemMessage(Component.literal("§9[FayCore] §3Open repeat cmd gui..."));
-                     mc.setScreen(new FayCoreRepeatingCmdSettingsScreen(Component.literal("FayCore Repeat Command")));
+                     mc.setScreenAndShow(new FayCoreRepeatingCmdSettingsScreen(Component.literal("FayCore Repeat Command")));
                   }
                });
                return false;
@@ -230,7 +230,7 @@ public class FaycoreModClient implements ClientModInitializer {
                mc.execute(() -> {
                   if (mc.player != null) {
                      mc.player.sendSystemMessage(Component.literal("§9[FayCore] §3Open FastRun gui..."));
-                     mc.setScreen(new FayCoreGhostCmdSettingsScreen());
+                     mc.setScreenAndShow(new FayCoreGhostCmdSettingsScreen());
                   }
                });
                return false;
@@ -244,7 +244,7 @@ public class FaycoreModClient implements ClientModInitializer {
                            try {
                               LocalPlayer player = mc.player;
                               FaycoreSettingsMenu menu = new FaycoreSettingsMenu(0, player.getInventory(), (Container)null);
-                              mc.setScreen(new FaycoreSettingsScreen(menu, player.getInventory(), Component.literal("FayCore settings")));
+                              mc.setScreenAndShow(new FaycoreSettingsScreen(menu, player.getInventory(), Component.literal("FayCore settings")));
                            } catch (Exception var3x) {
                               mc.player.connection.send(new ServerboundChatCommandPacket("faycore"));
                            }
@@ -261,7 +261,7 @@ public class FaycoreModClient implements ClientModInitializer {
                mc.execute(() -> {
                   if (mc.player != null) {
                      mc.player.sendSystemMessage(Component.literal("§9[FayCore] §3Open One Cmd Gui..."));
-                     mc.setScreen(new OneCmdManagerScreen());
+                     mc.setScreenAndShow(new OneCmdManagerScreen());
                   }
                });
                return false;
@@ -310,7 +310,7 @@ public class FaycoreModClient implements ClientModInitializer {
             mc.execute(() -> {
                if (mc.player != null) {
                   mc.player.sendSystemMessage(Component.literal("§9[FayCore] §3Open Macro gui..."));
-                  mc.setScreen(new FayCoreMacroScreen());
+                  mc.setScreenAndShow(new FayCoreMacroScreen());
                }
             });
             break;
@@ -318,7 +318,7 @@ public class FaycoreModClient implements ClientModInitializer {
             mc.execute(() -> {
                if (mc.player != null) {
                   mc.player.sendSystemMessage(Component.literal("§9[FayCore] §3Open FastRun gui..."));
-                  mc.setScreen(new FayCoreGhostCmdSettingsScreen());
+                  mc.setScreenAndShow(new FayCoreGhostCmdSettingsScreen());
                }
             });
             break;
@@ -327,7 +327,7 @@ public class FaycoreModClient implements ClientModInitializer {
             mc.execute(() -> {
                if (mc.player != null) {
                   mc.player.sendSystemMessage(Component.literal("§9[FayCore] §3Open One Cmd Gui..."));
-                  mc.setScreen(new OneCmdManagerScreen());
+                  mc.setScreenAndShow(new OneCmdManagerScreen());
                }
             });
             break;
@@ -335,7 +335,7 @@ public class FaycoreModClient implements ClientModInitializer {
             mc.execute(() -> {
                if (mc.player != null) {
                   mc.player.sendSystemMessage(Component.literal("§9[FayCore] §3Open repeat cmd gui..."));
-                  mc.setScreen(new FayCoreRepeatingCmdSettingsScreen(Component.literal("FayCore Repeat Command")));
+                  mc.setScreenAndShow(new FayCoreRepeatingCmdSettingsScreen(Component.literal("FayCore Repeat Command")));
                }
             });
             break;
@@ -357,7 +357,7 @@ public class FaycoreModClient implements ClientModInitializer {
                   try {
                      LocalPlayer player = mc.player;
                      FaycoreSettingsMenu menu = new FaycoreSettingsMenu(0, player.getInventory(), (Container)null);
-                     mc.setScreen(new FaycoreSettingsScreen(menu, player.getInventory(), Component.literal("FayCore settings")));
+                     mc.setScreenAndShow(new FaycoreSettingsScreen(menu, player.getInventory(), Component.literal("FayCore settings")));
                   } catch (Exception e) {
                      mc.player.connection.send(new ServerboundChatCommandPacket("faycore"));
                   }

@@ -52,7 +52,7 @@ public class FayCoreGhostCmdSettingsScreen extends Screen {
       String initialConfirmText = FayCoreFastRun.IsLoop ? "Stop" : "\ud83d\ude80 Run";
       this.buttonConfirm = Button.builder(Component.literal(initialConfirmText), btn -> {
          if (this.minecraft != null) {
-            this.minecraft.setScreen((Screen)null);
+            this.minecraft.setScreenAndShow((Screen)null);
          }
 
          this.saveCommandsToLocal();
@@ -83,7 +83,7 @@ public class FayCoreGhostCmdSettingsScreen extends Screen {
 
                FayCoreFastRun.fireGhostPayloadQueue(new ArrayList<>(this.ghostCommandList));
                if (this.minecraft != null) {
-                  this.minecraft.setScreen((Screen)null);
+                  this.minecraft.setScreenAndShow((Screen)null);
                }
             }
          }

@@ -50,7 +50,7 @@ public class FaycoreModKeyMappings {
 		KeyMappingHelper.registerKeyMapping(OPEN_FAYCORE_MSGGUI);
 		KeyMappingHelper.registerKeyMapping(OPEN_FAYCORE_SETTINGS);
 		ClientTickEvents.END_CLIENT_TICK.register((client) -> {
-			if (client.screen == null) {
+			if (client.gui.screen() == null) {
 				OPEN_FAYCORE_MSGGUI.consumeClick();
 				OPEN_FAYCORE_SETTINGS.consumeClick();
 			}

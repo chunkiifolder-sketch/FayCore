@@ -18,18 +18,18 @@ public class SkillInput {
             Window currentWindow = client.getWindow();
             boolean isAltDown = InputConstants.isKeyDown(currentWindow, 342);
             if (isAltDown) {
-               if (client.screen == null && !isScreenOpening) {
+               if (client.gui.screen() == null && !isScreenOpening) {
                   isScreenOpening = true;
                   client.execute(() -> {
-                     client.setScreen(new SkillInteractScreen());
+                     client.setScreenAndShow(new SkillInteractScreen());
                      SkillTracker.skillMenuOpen = true;
                      wasAltDown = true;
                      currentHoveredSlot = -1;
                   });
                }
             } else if (isScreenOpening || wasAltDown) {
-               if (client.screen instanceof SkillInteractScreen) {
-                  client.execute(() -> client.setScreen(null));
+               if (client.gui.screen() instanceof SkillInteractScreen) {
+                  client.execute(() -> client.setScreenAndShow(null));
                }
 
                SkillTracker.skillMenuOpen = false;
@@ -38,7 +38,7 @@ public class SkillInput {
                currentHoveredSlot = -1;
             }
 
-            if (client.screen != null) {
+            if (client.gui.screen() != null) {
                isVKeyCurrentlyHolding = false;
                isVKeyWaitingForPhysicalRelease = false;
             } else {

@@ -129,7 +129,7 @@ public class FayCoreMacroScreen extends Screen {
                     }
 
                     FayCoreMacroEngine.saveGroupsToDisk();
-                    this.minecraft.setScreen(this);
+                    this.minecraft.setScreenAndShow(this);
                 }
 
             }).bounds(reorderBtnX, startY + i * spacingY, 15, 16).build();
@@ -148,7 +148,7 @@ public class FayCoreMacroScreen extends Screen {
                     }
 
                     FayCoreMacroEngine.saveGroupsToDisk();
-                    this.minecraft.setScreen(this);
+                    this.minecraft.setScreenAndShow(this);
                 }
 
             }).bounds(reorderBtnX + 16, startY + i * spacingY, 15, 16).build();
@@ -168,7 +168,7 @@ public class FayCoreMacroScreen extends Screen {
                     }
 
                     FayCoreMacroEngine.saveGroupsToDisk();
-                    this.minecraft.setScreen(this);
+                    this.minecraft.setScreenAndShow(this);
                 }
 
             }).bounds(delBtnX, startY + i * spacingY, 18, 16).build();
@@ -187,20 +187,20 @@ public class FayCoreMacroScreen extends Screen {
                 scrollOffsetIndex = activeList.size() - maxLinesPerPage;
             }
 
-            this.minecraft.setScreen(this);
+            this.minecraft.setScreenAndShow(this);
         }).bounds(rightPanelX, startY, 110, 16).build());
         int var10000 = FayCoreMacroEngine.selectedGroupIndex + 1;
         String groupBtnTxt = "Group: " + var10000 + " / " + FayCoreMacroEngine.totalGroupsCount;
         this.groupSelectButton = Button.builder(Component.literal(groupBtnTxt), (btn) -> {
             FayCoreMacroEngine.selectedGroupIndex = (FayCoreMacroEngine.selectedGroupIndex + 1) % FayCoreMacroEngine.totalGroupsCount;
             scrollOffsetIndex = 0;
-            this.minecraft.setScreen(this);
+            this.minecraft.setScreenAndShow(this);
         }).bounds(rightPanelX, startY + 22, 110, 16).build();
         this.addRenderableWidget(this.groupSelectButton);
         this.addRenderableWidget(Button.builder(Component.literal("Group +"), (btn) -> {
             if (FayCoreMacroEngine.totalGroupsCount != 10) {
                 ++FayCoreMacroEngine.totalGroupsCount;
-                this.minecraft.setScreen(this);
+                this.minecraft.setScreenAndShow(this);
             }
 
         }).bounds(rightPanelX, startY + 42, 53, 16).build());
@@ -212,7 +212,7 @@ public class FayCoreMacroScreen extends Screen {
                 }
 
                 scrollOffsetIndex = 0;
-                this.minecraft.setScreen(this);
+                this.minecraft.setScreenAndShow(this);
             }
 
         }).bounds(rightPanelX + 57, startY + 42, 53, 16).build());
@@ -230,7 +230,7 @@ public class FayCoreMacroScreen extends Screen {
             int nextMode = ((Integer)FayCoreMacroEngine.groupModes.get(FayCoreMacroEngine.selectedGroupIndex) + 1) % 3;
             FayCoreMacroEngine.groupModes.set(FayCoreMacroEngine.selectedGroupIndex, nextMode);
             FayCoreMacroEngine.saveGroupsToDisk();
-            this.minecraft.setScreen(this);
+            this.minecraft.setScreenAndShow(this);
         }).bounds(rightPanelX, startY + 64, 110, 16).build();
         this.modeToggleButton.setTooltip(Tooltip.create(Component.literal("§bMode\n§7Once: when you press, it will execute once time.\n§7Repeat: when you hold, it will keep execute.\n§7Auto: whatever it always execute.")));
         this.addRenderableWidget(this.modeToggleButton);
@@ -246,7 +246,7 @@ public class FayCoreMacroScreen extends Screen {
             }
 
             FayCoreMacroEngine.saveGroupsToDisk();
-            this.minecraft.setScreen(this);
+            this.minecraft.setScreenAndShow(this);
         }).bounds(rightPanelX, startY + 84, 110, 16).build();
         this.addRenderableWidget(this.toggleEnableButton);
         this.toggleEnableButton.setTooltip(Tooltip.create(Component.literal("§bState\n§7Click to toggle")));
@@ -280,7 +280,7 @@ public class FayCoreMacroScreen extends Screen {
 
             this.saveCurrentInputs();
             if (this.minecraft != null) {
-                this.minecraft.setScreen(this);
+                this.minecraft.setScreenAndShow(this);
             }
 
             return true;

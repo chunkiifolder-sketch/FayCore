@@ -27,7 +27,7 @@ public class MouseHandlerMixin {
 
         Minecraft client = Minecraft.getInstance();
 
-        if (client.player == null || (client.screen != null && !(client.screen instanceof SkillInteractScreen))) {
+        if (client.player == null || (client.gui.screen() != null && !(client.gui.screen() instanceof SkillInteractScreen))) {
             return;
         }
 

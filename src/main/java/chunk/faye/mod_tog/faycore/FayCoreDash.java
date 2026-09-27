@@ -26,7 +26,7 @@ public class FayCoreDash {
                cooldown--;
             }
 
-            if (var0.screen != null) {
+            if (var0.gui.screen() != null) {
                wasDown = false;
             } else {
                Window var1 = var0.getWindow();

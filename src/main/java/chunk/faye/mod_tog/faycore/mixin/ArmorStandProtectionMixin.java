@@ -3,7 +3,7 @@ package chunk.faye.mod_tog.faycore.mixin;
 import chunk.faye.mod_tog.faycore.config.CrashProtectionConfig;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -21,7 +21,7 @@ public class ArmorStandProtectionMixin {
    private void faycore$blockArmorStandSpam(ClientboundAddEntityPacket packet, CallbackInfo ci) {
       if (CrashProtectionConfig.enableEntityLimit) {
          try {
-            if (packet.getType() == EntityType.ARMOR_STAND) {
+            if (packet.getType() == EntityTypes.ARMOR_STAND) {
                faycore$armorStandCount++;
                if (faycore$armorStandCount > CrashProtectionConfig.maxArmorStands) {
                   ci.cancel();

@@ -65,7 +65,7 @@ public class FayCoreRepeatingCmdSettingsScreen extends Screen {
             }
          }).start();
          if (this.minecraft != null) {
-            this.minecraft.setScreen((Screen)null);
+            this.minecraft.setScreenAndShow((Screen)null);
          }
       }).bounds(this.width / 2 - 20, this.height - 45, 120, 20).build();
       this.addRenderableWidget(this.buttonConfirm);

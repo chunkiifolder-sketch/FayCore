@@ -55,7 +55,7 @@ public record MenuStateUpdateMessage(int elementType, String name, Object elemen
 		context.server().execute(() -> {
 			if (context.player().containerMenu instanceof FaycoreModMenus.MenuAccessor menu) {
 				menu.getMenuState().put(message.elementType + ":" + message.name, message.elementState);
-				if (Minecraft.getInstance().screen instanceof FaycoreModScreens.FabricScreenAccessor accessor) {
+				if (Minecraft.getInstance().gui.screen() instanceof FaycoreModScreens.FabricScreenAccessor accessor) {
 					accessor.updateMenuState(message.elementType, message.name, message.elementState);
 				}
 			}
@@ -68,7 +68,7 @@ public record MenuStateUpdateMessage(int elementType, String name, Object elemen
 		context.client().execute(() -> {
 			if (context.player().containerMenu instanceof FaycoreModMenus.MenuAccessor menu) {
 				menu.getMenuState().put(message.elementType + ":" + message.name, message.elementState);
-				if (Minecraft.getInstance().screen instanceof FaycoreModScreens.FabricScreenAccessor accessor) {
+				if (Minecraft.getInstance().gui.screen() instanceof FaycoreModScreens.FabricScreenAccessor accessor) {
 					accessor.updateMenuState(message.elementType, message.name, message.elementState);
 				}
 			}

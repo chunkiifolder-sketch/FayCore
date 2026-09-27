@@ -1,6 +1,6 @@
 # FayCore
 
-A Fabric utility / quality-of-life mod for **Minecraft 26.1.2**.
+A Fabric utility / quality-of-life mod for **Minecraft 26.2**.
 
 **Package:** `chunk.faye.mod_tog.faycore`
 **Mod id:** `faycore`
@@ -40,8 +40,8 @@ releases/                                    # built jars
 
 - Java **25**
 - Gradle **9.7+** + Fabric Loom
-- Minecraft **26.1.2** (de-obfuscated — no mappings declaration needed)
-- Fabric Loader `>=0.19.3`, Fabric API `0.155.3+26.1.2`
+- Minecraft **26.2** (de-obfuscated — no mappings declaration needed)
+- Fabric Loader `>=0.19.3`, Fabric API `0.161.0+26.2`
 
 > Note: the Java source in `src/` is a decompiled reconstruction of the compiled mod
 > (no original source exists for 1.1.0-beta.1), so it is provided for reference and editing.

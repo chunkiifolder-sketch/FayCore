@@ -17,7 +17,7 @@ public class EditBoxMixin {
         net.minecraft.client.Minecraft mc = net.minecraft.client.Minecraft.getInstance();
 
         // 只有在 FayCore 介面裡才觸發高亮，維持原生的絕對安全相容
-        if (mc.screen instanceof chunk.faye.mod_tog.faycore.client.gui.FayCoreMacroScreen) {
+        if (mc.gui.screen() instanceof chunk.faye.mod_tog.faycore.client.gui.FayCoreMacroScreen) {
 
             net.minecraft.network.chat.MutableComponent dynamicColored = net.minecraft.network.chat.Component.empty();
 

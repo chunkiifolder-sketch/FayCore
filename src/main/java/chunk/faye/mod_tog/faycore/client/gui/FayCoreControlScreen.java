@@ -40,7 +40,7 @@ public class FayCoreControlScreen extends Screen {
             FayCoreMacroEngine.autoFindAndInjectVCommand(this.mc, KillTarget);
          }
 
-         Minecraft.getInstance().setScreen(null);
+         Minecraft.getInstance().setScreenAndShow(null);
       }).bounds(this.width / 2 - 95, this.height / 2 - 50, 50, 20).build();
       this.KillButton.active = target != null && SkillManager.IsControl;
       this.KillButton.setTooltip(Tooltip.create(Component.literal("§cTarget: §f" + TargetName + "\n§7UUID: §f" + TargetUUID)));
@@ -56,7 +56,7 @@ public class FayCoreControlScreen extends Screen {
             SkillTracker.controlTarget = null;
          }
 
-         Minecraft.getInstance().setScreen(null);
+         Minecraft.getInstance().setScreenAndShow(null);
       }).bounds(this.width / 2 - 25, this.height / 2 - 50, 50, 20).build();
       this.FreezeButton.active = target != null && SkillManager.IsControl && isPlayer;
       this.FreezeButton.setTooltip(Tooltip.create(Component.literal("§cTarget: §f" + TargetName + "\n§7UUID: §f" + TargetUUID)));
@@ -81,7 +81,7 @@ public class FayCoreControlScreen extends Screen {
                   SkillTracker.controlTarget = null;
                }
 
-               Minecraft.getInstance().setScreen(null);
+               Minecraft.getInstance().setScreenAndShow(null);
             }
          )
          .bounds(this.width / 2 + 50, this.height / 2 - 50, 50, 20)

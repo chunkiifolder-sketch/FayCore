@@ -34,14 +34,14 @@ public class ScreenOverrideMixin {
                button.setMessage(Component.literal(CrashProtectionConfig.enableDialogLimit ? "§aDialog: ON" : "§cDialog: OFF"));
                if (!CrashProtectionConfig.enableDialogLimit) {
                   mc.execute(() -> {
-                     mc.setScreen(null);
+                     mc.setScreenAndShow(null);
                      mc.player.sendSystemMessage(Component.literal("§d[FayCore] Block dialog!"));
                   });
                }
             }).bounds(xPos, yPos, buttonWidth, buttonHeight).build();
          }
 
-         if (mc.screen == null || mc.screen.getClass().getSimpleName().contains("Dialog") || !CrashProtectionConfig.enableDialogLimit) {
+         if (mc.gui.screen() == null || mc.gui.screen().getClass().getSimpleName().contains("Dialog") || !CrashProtectionConfig.enableDialogLimit) {
             try {
                Object mouseHandler = mc.mouseHandler;
                double rawX = 0.0;

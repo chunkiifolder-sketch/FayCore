@@ -62,12 +62,9 @@ public class SkillInteractScreen extends Screen {
                      SkillState.setSelected(i);
                      String skillName = SkillState.getSkillName(i);
                      this.minecraft
-                        .gui
-                        .setOverlayMessage(
+                        .player.sendOverlayMessage(
                            Component.literal("▶ [FayCore] 已裝配特技: " + skillName + " ◀")
-                              .withStyle(new ChatFormatting[]{ChatFormatting.GOLD, ChatFormatting.BOLD}),
-                           false
-                        );
+                              .withStyle(new ChatFormatting[]{ChatFormatting.GOLD, ChatFormatting.BOLD}));
                      this.minecraft
                         .level
                         .playSound(
@@ -255,7 +252,7 @@ public class SkillInteractScreen extends Screen {
                   );
                   break;
                case 3:
-                  mc.setScreen(new FayCoreControlScreen());
+                  mc.setScreenAndShow(new FayCoreControlScreen());
                case 4:
                case 6:
                default:

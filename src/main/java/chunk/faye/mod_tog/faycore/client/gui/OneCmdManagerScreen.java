@@ -186,13 +186,13 @@ public class OneCmdManagerScreen extends Screen {
                   } catch (NumberFormatException var16) {
                      if (this.minecraft != null && this.minecraft.player != null) {
                         this.minecraft.player.sendSystemMessage(Component.literal("§9[FayCore] §cError: 座標內必須填寫純數字！"));
-                        this.minecraft.setScreen(null);
+                        this.minecraft.setScreenAndShow(null);
                         return;
                      }
                   }
                } else if (this.minecraft != null && this.minecraft.player != null) {
                   this.minecraft.player.sendSystemMessage(Component.literal("§9[FayCore] §cError: 請確保使用逗號分隔 X,Y,Z 三軸座標！"));
-                  this.minecraft.setScreen(null);
+                  this.minecraft.setScreenAndShow(null);
                   return;
                }
             }
@@ -405,7 +405,7 @@ public class OneCmdManagerScreen extends Screen {
                if (this.minecraft.player != null) {
                   this.minecraft.player.playSound(SoundEvents.ENDER_DRAGON_SHOOT, 1.0F, 1.2F);
                   this.minecraft.player.sendSystemMessage(Component.literal("§9[FayCore] §7Copied one cmd."));
-                  this.minecraft.setScreen(null);
+                  this.minecraft.setScreenAndShow(null);
                }
             }
 
@@ -448,12 +448,12 @@ public class OneCmdManagerScreen extends Screen {
                   this.minecraft.player.playSound((SoundEvent)SoundEvents.NOTE_BLOCK_PLING.value(), 1.0F, 2.0F);
                   this.minecraft.player.playSound(SoundEvents.ITEM_PICKUP, 1.0F, 1.5F);
                   this.minecraft.player.sendSystemMessage(Component.literal("§9[FayCore] §7Gave one cmd block."));
-                  this.minecraft.setScreen(null);
+                  this.minecraft.setScreenAndShow(null);
                } else {
                   this.minecraft.player.playSound((SoundEvent)SoundEvents.NOTE_BLOCK_PLING.value(), 1.0F, 0.0F);
                   this.minecraft.player.playSound(SoundEvents.LIGHTNING_BOLT_THUNDER, 1.0F, 1.0F);
                   this.minecraft.player.sendSystemMessage(Component.literal("§9[FayCore] §cErrror: Request creative!"));
-                  this.minecraft.setScreen(null);
+                  this.minecraft.setScreenAndShow(null);
                }
             }
 
@@ -499,12 +499,12 @@ public class OneCmdManagerScreen extends Screen {
                   this.minecraft.player.playSound((SoundEvent)SoundEvents.NOTE_BLOCK_PLING.value(), 1.0F, 2.0F);
                   this.minecraft.player.playSound(SoundEvents.ITEM_PICKUP, 1.0F, 1.5F);
                   this.minecraft.player.sendSystemMessage(Component.literal("§9[FayCore] §7Gave one cmd block."));
-                  this.minecraft.setScreen(null);
+                  this.minecraft.setScreenAndShow(null);
                } else {
                   this.minecraft.player.playSound((SoundEvent)SoundEvents.NOTE_BLOCK_PLING.value(), 1.0F, 0.0F);
                   this.minecraft.player.playSound(SoundEvents.LIGHTNING_BOLT_THUNDER, 1.0F, 1.0F);
                   this.minecraft.player.sendSystemMessage(Component.literal("§9[FayCore] §cErrror: Request creative!"));
-                  this.minecraft.setScreen(null);
+                  this.minecraft.setScreenAndShow(null);
                }
             }
          }

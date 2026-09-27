@@ -16,7 +16,7 @@ public class FayCoreZoom {
       ClientTickEvents.END_CLIENT_TICK.register((EndTick)var0 -> {
          if (var0.player != null && var0.options != null) {
             Window var1 = var0.getWindow();
-            boolean var2 = InputConstants.isKeyDown(var1, 90) && var0.screen == null;
+            boolean var2 = InputConstants.isKeyDown(var1, 90) && var0.gui.screen() == null;
             if (var2 != zooming) {
                zooming = var2;
                applyZoom(var0);

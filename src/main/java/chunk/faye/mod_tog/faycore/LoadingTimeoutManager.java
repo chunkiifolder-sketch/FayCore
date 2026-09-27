@@ -12,7 +12,7 @@ public class LoadingTimeoutManager {
       if (mc.player == null) {
          loadingTickCounter = 0;
       } else {
-         if (mc.screen instanceof LevelLoadingScreen) {
+         if (mc.gui.screen() instanceof LevelLoadingScreen) {
             loadingTickCounter++;
             if (loadingTickCounter >= 100) {
                loadingTickCounter = 0;

@@ -130,7 +130,7 @@ public class FaycoreSettingsScreen extends AbstractContainerScreen<FaycoreSettin
                      fillStage = 1;
                      this.saveCoordinatesToLocal();
                      mc.player.sendSystemMessage(Component.literal("§9[FayCore] §lA §7Pos set: §e" + ax + ", " + ay + ", " + az));
-                     this.minecraft.setScreen((Screen)null);
+                     this.minecraft.setScreenAndShow((Screen)null);
                   } else if (fillStage == 1) {
                      int bx = this.parseInputField("input_bx", mc.player.blockPosition().getX());
                      int by = this.parseInputField("input_by", mc.player.blockPosition().getY());
@@ -179,7 +179,7 @@ public class FaycoreSettingsScreen extends AbstractContainerScreen<FaycoreSettin
                            }
                         )
                         .start();
-                     this.minecraft.setScreen((Screen)null);
+                     this.minecraft.setScreenAndShow((Screen)null);
                      startParticleThread(mc);
                      int curMode = FayCoreMacroEngine.groupModes.get(FayCoreMacroEngine.selectedGroupIndex);
                      boolean curEnable = FayCoreMacroEngine.groupEnables.get(FayCoreMacroEngine.selectedGroupIndex);
@@ -204,7 +204,7 @@ public class FaycoreSettingsScreen extends AbstractContainerScreen<FaycoreSettin
                      fillStage = 0;
                      posA = null;
                      posB = null;
-                     this.minecraft.setScreen((Screen)null);
+                     this.minecraft.setScreenAndShow((Screen)null);
                   }
                }
             }
@@ -311,7 +311,7 @@ public class FaycoreSettingsScreen extends AbstractContainerScreen<FaycoreSettin
                            }
                         )
                         .start();
-                     this.minecraft.setScreen((Screen)null);
+                     this.minecraft.setScreenAndShow((Screen)null);
                      startParticleThread(mc);
                      int curMode = FayCoreMacroEngine.groupModes.get(FayCoreMacroEngine.selectedGroupIndex);
                      boolean curEnable = FayCoreMacroEngine.groupEnables.get(FayCoreMacroEngine.selectedGroupIndex);
@@ -383,12 +383,12 @@ public class FaycoreSettingsScreen extends AbstractContainerScreen<FaycoreSettin
                            hasOverlayShownThisStage = true;
                            mc.execute(() -> {
                               if (mc.gui != null) {
-                                 mc.gui.setOverlayMessage(Component.literal("§a§l[FayCore 選區] §e§l" + sX + "x" + sY + "x" + sZ + " §f§l(雙層指令核心)"), false);
+                                 mc.player.sendOverlayMessage(Component.literal("§a§l[FayCore 選區] §e§l" + sX + "x" + sY + "x" + sZ + " §f§l(雙層指令核心)"));
                                  ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
                                  executor.schedule(() -> {
                                     mc.execute(() -> {
                                        if (mc.gui != null) {
-                                          mc.gui.setOverlayMessage(Component.empty(), false);
+                                          mc.player.sendOverlayMessage(Component.empty());
                                        }
                                     });
                                     executor.shutdown();
@@ -577,7 +577,7 @@ public class FaycoreSettingsScreen extends AbstractContainerScreen<FaycoreSettin
                            CompoundTag nbt = new CompoundTag();
                            nbt.putString("Command", finalCmd);
                            nbt.putBoolean("auto", true);
-                           nbt.putBoolean("powered", false);
+                           nbt.putBoolean("powered", true);
                            nbt.putString("id", "minecraft:command_block");
                            ServerboundSetCommandBlockPacket setPacket = new ServerboundSetCommandBlockPacket(targetPos, finalCmd, Mode.AUTO, false, false, true);
                            mc.player.connection.send(setPacket);

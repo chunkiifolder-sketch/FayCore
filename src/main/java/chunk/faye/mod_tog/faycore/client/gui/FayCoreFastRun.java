@@ -39,7 +39,7 @@ public class FayCoreFastRun {
             Minecraft.getInstance().player.playSound((SoundEvent)SoundEvents.NOTE_BLOCK_PLING.value(), 1.0F, 0.0F);
             Minecraft.getInstance().player.playSound(SoundEvents.LIGHTNING_BOLT_THUNDER, 1.0F, 1.0F);
             Minecraft.getInstance().player.sendSystemMessage(Component.literal("§9[FayCore] §cErrror: Request creative!"));
-            Minecraft.getInstance().setScreen(null);
+            Minecraft.getInstance().setScreenAndShow(null);
          } else {
             new Thread(
                   () -> {
@@ -190,7 +190,7 @@ public class FayCoreFastRun {
                Minecraft.getInstance().player.playSound((SoundEvent)SoundEvents.NOTE_BLOCK_PLING.value(), 1.0F, 0.0F);
                Minecraft.getInstance().player.playSound(SoundEvents.LIGHTNING_BOLT_THUNDER, 1.0F, 1.0F);
                Minecraft.getInstance().player.sendSystemMessage(Component.literal("§9[FayCore] §cErrror: Request creative!"));
-               Minecraft.getInstance().setScreen(null);
+               Minecraft.getInstance().setScreenAndShow(null);
             } else {
                new Thread(
                      () -> {

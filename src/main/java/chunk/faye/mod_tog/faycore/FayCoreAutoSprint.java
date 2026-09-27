@@ -14,7 +14,7 @@ public class FayCoreAutoSprint {
    public static void register() {
       ClientTickEvents.END_CLIENT_TICK.register((EndTick)var0 -> {
          if (var0.player != null) {
-            if (var0.screen != null) {
+            if (var0.gui.screen() != null) {
                wasDown = false;
                return;
             }

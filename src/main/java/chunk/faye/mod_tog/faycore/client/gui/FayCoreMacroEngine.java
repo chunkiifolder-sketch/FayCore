@@ -466,11 +466,8 @@ public class FayCoreMacroEngine {
                int maxZ = Math.max(pA.getZ(), pB.getZ());
                BlockPos targetBlock = findNextEmptyBlock(mc, 9, minX, maxX, minY, maxY, minZ, maxZ);
                if (targetBlock == null && FaycoreSettingsScreen.posA != null && FaycoreSettingsScreen.posB != null) {
-                  mc.gui
-                     .setOverlayMessage(
-                        Component.literal("§9[FayCore] §cError: No empty cmd block!").withStyle(new ChatFormatting[]{ChatFormatting.RED, ChatFormatting.BOLD}),
-                        false
-                     );
+                  mc.player.sendOverlayMessage(
+                        Component.literal("§9[FayCore] §cError: No empty cmd block!").withStyle(new ChatFormatting[]{ChatFormatting.RED, ChatFormatting.BOLD}));
                   FaycoreSettingsScreen.FillCoreCmd();
                   FaycoreSettingsScreen.FillRepeatingCore();
                   matrixOwnedBlocksCache.get(9).clear();
@@ -496,12 +493,9 @@ public class FayCoreMacroEngine {
                   mc.player.connection.send(new ServerboundSetCommandBlockPacket(targetBlock, finalCmd, Mode.REDSTONE, false, false, true));
                }
             } else {
-               mc.gui
-                  .setOverlayMessage(
+               mc.player.sendOverlayMessage(
                      Component.literal("§9[FayCore] §cError: not yet set posA and posB!")
-                        .withStyle(new ChatFormatting[]{ChatFormatting.RED, ChatFormatting.BOLD}),
-                     false
-                  );
+                        .withStyle(new ChatFormatting[]{ChatFormatting.RED, ChatFormatting.BOLD}));
                if (mc.level != null) {
                   mc.level
                      .playLocalSound(
