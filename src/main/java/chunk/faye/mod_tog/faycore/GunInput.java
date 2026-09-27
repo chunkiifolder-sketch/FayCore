@@ -80,7 +80,7 @@ public class GunInput {
                delay--;
                if (delay <= 0) {
                   waiting = false;
-                  FayCoreMacroEngine.autoFindAndInjectVCommand(mc, "kill @e[type=minecraft:block_display,tag=faycore_gun.bullet]");
+                  FayCoreMacroEngine.autoFindAndInjectVCommand(mc, "kill @e[type=minecraft:block_display,tag=Faycore.gun.bullet]");
                }
             }
          }
@@ -90,7 +90,7 @@ public class GunInput {
    private static boolean isGun(Minecraft mc) {
       ItemStack offhand = mc.player.getOffhandItem();
       CustomData data = (CustomData)offhand.get(DataComponents.CUSTOM_DATA);
-      return data == null ? false : data.copyTag().contains("faycore_fakegun");
+      return data == null ? false : data.copyTag().contains("Faycore.fakegun");
    }
 
    private static void fireGun(Minecraft mc) {
@@ -117,7 +117,7 @@ public class GunInput {
             String.format(
                "execute as %%player%% at @s positioned ^ ^-0.25 ^0.5 run summon minecraft:block_display ~ ~1.75 ~ {interpolation_duration:"
                   + INTERPOLATION_DURATION
-                  + ",start_interpolation:0,block_state:{Name:\"minecraft:yellow_stained_glass\"},transformation:{right_rotation:[0f,0f,0f,1f],left_rotation:[0f,0f,0f,1f],translation:[0f,0f,0f],scale:[0.05f,0.05f,%ff]},Tags:[\"faycore_gun.bullet\"]}",
+                  + ",start_interpolation:0,block_state:{Name:\"minecraft:yellow_stained_glass\"},transformation:{right_rotation:[0f,0f,0f,1f],left_rotation:[0f,0f,0f,1f],translation:[0f,0f,0f],scale:[0.05f,0.05f,%ff]},Tags:[\"Faycore.gun.bullet\"]}",
                distance
             )
          );
@@ -127,24 +127,24 @@ public class GunInput {
             String.format(
                "execute as %%player%% at @s positioned ^ ^-0.25 ^0.5 run summon minecraft:block_display ~ ~1.75 ~ {interpolation_duration:"
                   + INTERPOLATION_DURATION
-                  + ",start_interpolation:0,block_state:{Name:\"minecraft:red_stained_glass\"},transformation:{right_rotation:[0f,0f,0f,1f],left_rotation:[0f,0f,0f,1f],translation:[0f,0f,0f],scale:[0.05f,0.05f,%ff]},Tags:[\"faycore_gun.bullet\"]}",
+                  + ",start_interpolation:0,block_state:{Name:\"minecraft:red_stained_glass\"},transformation:{right_rotation:[0f,0f,0f,1f],left_rotation:[0f,0f,0f,1f],translation:[0f,0f,0f],scale:[0.05f,0.05f,%ff]},Tags:[\"Faycore.gun.bullet\"]}",
                distance
             )
          );
       }
 
       FayCoreMacroEngine.autoFindAndInjectVCommand(
-         mc, "execute as @e[tag=faycore_gun.bullet] at %player% rotated as %player% positioned ^ ^-0.25 ^0.5 run tp @s ~ ~1.75 ~ ~ ~"
+         mc, "execute as @e[tag=Faycore.gun.bullet] at %player% rotated as %player% positioned ^ ^-0.25 ^0.5 run tp @s ~ ~1.75 ~ ~ ~"
       );
       if (SkillInteractScreen.GunMode == 0) {
          FayCoreMacroEngine.autoFindAndInjectVCommand(
             mc,
-            "execute as @e[tag=faycore_gun.bullet] at %player% positioned ^ ^-0.25 ^0.5 run playsound minecraft:entity.copper_golem.death master @a ~ ~ ~ 5 1 1"
+            "execute as @e[tag=Faycore.gun.bullet] at %player% positioned ^ ^-0.25 ^0.5 run playsound minecraft:entity.copper_golem.death master @a ~ ~ ~ 5 1 1"
          );
       } else if (SkillInteractScreen.GunMode == 1) {
          FayCoreMacroEngine.autoFindAndInjectVCommand(
             mc,
-            "execute as @e[tag=faycore_gun.bullet] at %player% positioned ^ ^-0.25 ^0.5 run playsound minecraft:block.beacon.deactivate master @a ~ ~ ~ 5 1 1"
+            "execute as @e[tag=Faycore.gun.bullet] at %player% positioned ^ ^-0.25 ^0.5 run playsound minecraft:block.beacon.deactivate master @a ~ ~ ~ 5 1 1"
          );
       }
 

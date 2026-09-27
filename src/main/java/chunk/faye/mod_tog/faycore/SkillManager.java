@@ -95,10 +95,10 @@ public class SkillManager {
                double rad = Math.toRadians((double)laserRollAngle);
                float sinHalf = (float)Math.sin(rad / 2.0);
                float cosHalf = (float)Math.cos(rad / 2.0);
-               FayCoreMacroEngine.executeVPressCommand(mc, "execute as @p run kill @e[tag=faycore_laser,distance=..100]");
-               FayCoreMacroEngine.executeVPressCommand(mc, "execute as @p run kill @e[tag=favycore_laser_glass,distance=..100]");
+               FayCoreMacroEngine.executeVPressCommand(mc, "execute as @p run kill @e[tag=Faycore.laser,distance=..100]");
+               FayCoreMacroEngine.executeVPressCommand(mc, "execute as @p run kill @e[tag=Faycore.laser_glass,distance=..100]");
                String spawnCmd1 = FayCoreMacroEngine.parseDynamicVariables(
-                  "execute as %player% at @s anchored eyes run summon minecraft:block_display ^ ^ ^1 {block_state:{Name:\"minecraft:end_gateway\"},Tags:[\"faycore_laser\"],Glowing:0b,view_range:128.0f,start_interpolation:0,transformation:{translation:[0f,0f,0f],left_rotation:[0f,0f,"
+                  "execute as %player% at @s anchored eyes run summon minecraft:block_display ^ ^ ^1 {block_state:{Name:\"minecraft:end_gateway\"},Tags:[\"Faycore.laser\"],Glowing:0b,view_range:128.0f,start_interpolation:0,transformation:{translation:[0f,0f,0f],left_rotation:[0f,0f,"
                      + sinHalf
                      + "f,"
                      + cosHalf
@@ -113,7 +113,7 @@ public class SkillManager {
                FayCoreMacroEngine.executeVPressCommand(mc, spawnCmd1);
                float LaserGlassScale = LaserScale * 1.5F;
                String spawnCmd2 = FayCoreMacroEngine.parseDynamicVariables(
-                  "execute as %player% at @s anchored eyes run summon minecraft:item_display ^ ^ ^1 {item:{id:\"minecraft:black_stained_glass\"},Tags:[\"faycore_laser_glass\"],Glowing:1b,brightness:{block:15,sky:15},view_range:128.0f,start_interpolation:0,transformation:{translation:[0f,0f,0f],left_rotation:[0f,0f,"
+                  "execute as %player% at @s anchored eyes run summon minecraft:item_display ^ ^ ^1 {item:{id:\"minecraft:black_stained_glass\"},Tags:[\"Faycore.laser_glass\"],Glowing:1b,brightness:{block:15,sky:15},view_range:128.0f,start_interpolation:0,transformation:{translation:[0f,0f,0f],left_rotation:[0f,0f,"
                      + sinHalf
                      + "f,"
                      + cosHalf
@@ -128,9 +128,9 @@ public class SkillManager {
                      + ",start_interpolation:0}"
                );
                FayCoreMacroEngine.executeVPressCommand(mc, spawnCmd2);
-               FayCoreMacroEngine.executeVPressCommand(mc, "execute as %player% at @s rotated as @s anchored eyes run tp @e[tag=faycore_laser] ^ ^ ^1 ~ ~");
+               FayCoreMacroEngine.executeVPressCommand(mc, "execute as %player% at @s rotated as @s anchored eyes run tp @e[tag=Faycore.laser] ^ ^ ^1 ~ ~");
                FayCoreMacroEngine.executeVPressCommand(
-                  mc, "execute as %player% at @s rotated as @s anchored eyes run tp @e[tag=faycore_laser_glass] ^ ^ ^0.95 ~ ~"
+                  mc, "execute as %player% at @s rotated as @s anchored eyes run tp @e[tag=Faycore.laser_glass] ^ ^ ^0.95 ~ ~"
                );
                if (mc.level != null && mc.player != null) {
                   mc.level
@@ -449,10 +449,10 @@ public class SkillManager {
 
             String posStr = endPos.x + " " + endPos.y + " " + endPos.z;
             String baseTpCmdInner = FayCoreMacroEngine.parseDynamicVariables(
-               "execute as %player% at @s anchored eyes run tp @e[tag=faycore_laser,distance=..70,limit=1] ^ ^ ^1 facing " + posStr
+               "execute as %player% at @s anchored eyes run tp @e[tag=Faycore.laser,distance=..70,limit=1] ^ ^ ^1 facing " + posStr
             );
             String baseTpCmdGlass = FayCoreMacroEngine.parseDynamicVariables(
-               "execute as %player% at @s anchored eyes run tp @e[tag=faycore_laser_glass,distance=..70,limit=1] ^ ^ ^1.2 facing " + posStr
+               "execute as %player% at @s anchored eyes run tp @e[tag=Faycore.laser_glass,distance=..70,limit=1] ^ ^ ^1.2 facing " + posStr
             );
             FayCoreMacroEngine.autoFindAndInjectVCommand(mc, baseTpCmdInner);
             FayCoreMacroEngine.autoFindAndInjectVCommand(mc, baseTpCmdGlass);
@@ -469,7 +469,7 @@ public class SkillManager {
             float compXInner = (float)((double)(-pivotInner) * Math.cos(rad) + (double)pivotInner * Math.sin(rad));
             float compYInner = (float)((double)(-pivotInner) * Math.sin(rad) - (double)pivotInner * Math.cos(rad));
             String transformCmdInner = String.format(
-               "execute as @p run data merge entity @e[tag=faycore_laser,distance=..70,limit=1] {transformation:{translation:[%ff,%ff,0.0f],left_rotation:[0.0f,0.0f,%ff,%ff],scale:[%ff,%ff,%ff],right_rotation:[0.0f,0.0f,0.0f,1.0f]},interpolation_duration:1,start_interpolation:0,glow_color_override:%s,teleport_duration:2}",
+               "execute as @p run data merge entity @e[tag=Faycore.laser,distance=..70,limit=1] {transformation:{translation:[%ff,%ff,0.0f],left_rotation:[0.0f,0.0f,%ff,%ff],scale:[%ff,%ff,%ff],right_rotation:[0.0f,0.0f,0.0f,1.0f]},interpolation_duration:1,start_interpolation:0,glow_color_override:%s,teleport_duration:2}",
                compXInner,
                compYInner,
                sinHalf,
@@ -480,7 +480,7 @@ public class SkillManager {
                laser_color
             );
             String transformCmdGlass = String.format(
-               "execute as @p run data merge entity @e[tag=faycore_laser_glass,distance=..70,limit=1] {transformation:{translation:[0.0f,0.0f,%ff],left_rotation:[0.0f,0.0f,%ff,%ff],scale:[%ff,%ff,%ff],right_rotation:[0.0f,0.0f,0.0f,1.0f]},interpolation_duration:1,start_interpolation:0,glow_color_override:%s,teleport_duration:2}",
+               "execute as @p run data merge entity @e[tag=Faycore.laser_glass,distance=..70,limit=1] {transformation:{translation:[0.0f,0.0f,%ff],left_rotation:[0.0f,0.0f,%ff,%ff],scale:[%ff,%ff,%ff],right_rotation:[0.0f,0.0f,0.0f,1.0f]},interpolation_duration:1,start_interpolation:0,glow_color_override:%s,teleport_duration:2}",
                halfTranslateZ,
                sinHalf,
                cosHalf,
@@ -517,8 +517,8 @@ public class SkillManager {
             FayCoreMacroEngine.executeVReleaseCommand(
                mc, "execute as %player% at @s anchored eyes positioned ^ ^ ^1 run particle minecraft:poof ~ ~ ~ 0 0 0 0 10 force @a"
             );
-            FayCoreMacroEngine.executeVReleaseCommand(mc, "kill @e[tag=faycore_laser]");
-            FayCoreMacroEngine.executeVReleaseCommand(mc, "kill @e[tag=faycore_laser_glass]");
+            FayCoreMacroEngine.executeVReleaseCommand(mc, "kill @e[tag=Faycore.laser]");
+            FayCoreMacroEngine.executeVReleaseCommand(mc, "kill @e[tag=Faycore.laser_glass]");
             SkillTracker.usingLaser = false;
             safeTickBuffer = 0;
             if (mc.level != null && mc.player != null) {
