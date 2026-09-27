@@ -202,7 +202,11 @@ public class FaycoreModClient implements ClientModInitializer {
             return true;
          } else {
             String rawText = message.trim();
-            if (rawText.equalsIgnoreCase("fm") || rawText.equalsIgnoreCase("/fm")) {
+            String lowerText = rawText.toLowerCase();
+            if (lowerText.equals("fc") || lowerText.equals("/fc") || lowerText.startsWith("/fc ") || lowerText.startsWith("fc ")) {
+               handleFcCommand(rawText);
+               return false;
+            } else if (rawText.equalsIgnoreCase("fm") || rawText.equalsIgnoreCase("/fm")) {
                Minecraft mc = Minecraft.getInstance();
                mc.execute(() -> {
                   if (mc.player != null) {
@@ -278,5 +282,77 @@ public class FaycoreModClient implements ClientModInitializer {
             hudDisplayTickCooldown = 35;
          }
       }
+   }
+
+   private static void handleFcCommand(String rawText) {
+      String subcommand = rawText.trim().toLowerCase();
+      int spaceIdx = subcommand.indexOf(' ');
+      subcommand = spaceIdx == -1 ? "" : subcommand.substring(spaceIdx + 1).trim();
+      Minecraft mc = Minecraft.getInstance();
+      switch (subcommand) {
+         case "core":
+         case "settings":
+            openFcSettings(mc);
+            break;
+         case "macro":
+            mc.execute(() -> {
+               if (mc.player != null) {
+                  mc.player.sendSystemMessage(Component.literal("§9[FayCore] §3Open Macro gui..."));
+                  mc.setScreen(new FayCoreMacroScreen());
+               }
+            });
+            break;
+         case "fastrun":
+            mc.execute(() -> {
+               if (mc.player != null) {
+                  mc.player.sendSystemMessage(Component.literal("§9[FayCore] §3Open FastRun gui..."));
+                  mc.setScreen(new FayCoreGhostCmdSettingsScreen());
+               }
+            });
+            break;
+         case "onecmdgen":
+         case "onecmd":
+            mc.execute(() -> {
+               if (mc.player != null) {
+                  mc.player.sendSystemMessage(Component.literal("§9[FayCore] §3Open One Cmd Gui..."));
+                  mc.setScreen(new OneCmdManagerScreen());
+               }
+            });
+            break;
+         case "repeat":
+            mc.execute(() -> {
+               if (mc.player != null) {
+                  mc.player.sendSystemMessage(Component.literal("§9[FayCore] §3Open repeat cmd gui..."));
+                  mc.setScreen(new FayCoreRepeatingCmdSettingsScreen(Component.literal("FayCore Repeat Command")));
+               }
+            });
+            break;
+         default:
+            mc.execute(() -> {
+               if (mc.player != null) {
+                  mc.player.sendSystemMessage(Component.literal("§9[FayCore] §7Usage: /fc <core|macro|fastrun|onecmdgen|repeat>"));
+               }
+            });
+      }
+   }
+
+   private static void openFcSettings(Minecraft mc) {
+      new Thread(() -> {
+         try {
+            Thread.sleep(200L);
+            mc.execute(() -> {
+               if (mc.player != null && mc.level != null) {
+                  try {
+                     LocalPlayer player = mc.player;
+                     FaycoreSettingsMenu menu = new FaycoreSettingsMenu(0, player.getInventory(), (Container)null);
+                     mc.setScreen(new FaycoreSettingsScreen(menu, player.getInventory(), Component.literal("FayCore settings")));
+                  } catch (Exception e) {
+                     mc.player.connection.send(new ServerboundChatCommandPacket("faycore"));
+                  }
+               }
+            });
+         } catch (Exception e) {
+         }
+      }).start();
    }
 }

@@ -20,6 +20,11 @@ public class FayCoreAutoTool {
    public static void register() {
       ClientTickEvents.END_CLIENT_TICK.register((EndTick)var0 -> {
          if (var0.player != null && var0.level != null) {
+            if (var0.screen != null) {
+               wasDown = false;
+               return;
+            }
+
             Window var1 = var0.getWindow();
             boolean var2 = InputConstants.isKeyDown(var1, 78);
             if (var2 && !wasDown) {

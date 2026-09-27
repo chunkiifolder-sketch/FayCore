@@ -66,6 +66,11 @@ public class GunInput {
          Minecraft mc = Minecraft.getInstance();
          if (mc.player != null && mc.level != null) {
             boolean right = mc.options.keyUse.isDown();
+            if (mc.screen != null) {
+               lastRight = false;
+               return;
+            }
+
             if (right && !lastRight && isGun(mc)) {
                fireGun(mc);
             }
