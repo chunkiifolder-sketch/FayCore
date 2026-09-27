@@ -372,7 +372,7 @@ public class SkillManager {
                                  String gameruleCmd1 = "gamerule show_death_messages false";
                                  FayCoreMacroEngine.autoFindAndInjectVCommand(mc, gameruleCmd1);
                                  String customDeathMessageCmd = String.format(
-                                    "execute as %s if entity @s[type=minecraft:player] unless entity @s[nbt={Health:0f}] run tellraw @a [\"\",{selector:\"%s\"},\" was killed by %%player%% using \",\"[\",{text:\"§9%%player%%'s Laser\",hover_event:{action:\"show_text\",value:[\"§9%%player%%'s Laser\\n\",{\"text\":\"ꜰᴀʏᴄᴏʀᴇ\",\"color\":\"#B0FF95\",italic:false},\"\\n§7Made by §cFayeCruz\"]}},\"]\"]",
+                                    "execute as %s if entity @s[type=minecraft:player] unless entity @s[nbt={Health:0f}] run tellraw @a [\"\",{selector:\"%s\"},\" was killed by %%player%% using \",\"[\",{text:\"§9%%player%%'s Laser\",hover_event:{action:\"show_text\",value:[\"§9%%player%%'s Laser\\n\",{\"text\":\"ᴄʜᴜɴᴋɪɪꜰᴏʟᴅᴇʀ\",\"color\":\"#B0FF95\",italic:false},\"\\n§7Made by §cChunkiifolder\"]}},\"]\"]",
                                     uuid,
                                     uuid
                                  );
@@ -417,7 +417,7 @@ public class SkillManager {
                                  String gameruleCmd1 = "gamerule show_death_messages false";
                                  FayCoreMacroEngine.autoFindAndInjectVCommand(mc, gameruleCmd1);
                                  String customDeathMessageCmd = String.format(
-                                    "execute as %s if entity @s[type=minecraft:player] unless entity @s[nbt={Health:0f}] run tellraw @a [\"\",{selector:\"%s\"},\" was killed by %%player%% using \",\"[\",{text:\"§9%%player%%'s Laser\",hover_event:{action:\"show_text\",value:[\"§9%%player%%'s Laser\\n\",{\"text\":\"ꜰᴀʏᴄᴏʀᴇ\",\"color\":\"#B0FF95\",italic:false},\"\\n§7Made by §cFayeCruz\"]}},\"]\"]",
+                                    "execute as %s if entity @s[type=minecraft:player] unless entity @s[nbt={Health:0f}] run tellraw @a [\"\",{selector:\"%s\"},\" was killed by %%player%% using \",\"[\",{text:\"§9%%player%%'s Laser\",hover_event:{action:\"show_text\",value:[\"§9%%player%%'s Laser\\n\",{\"text\":\"ᴄʜᴜɴᴋɪɪꜰᴏʟᴅᴇʀ\",\"color\":\"#B0FF95\",italic:false},\"\\n§7Made by §cChunkiifolder\"]}},\"]\"]",
                                     uuid,
                                     uuid
                                  );

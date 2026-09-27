@@ -429,8 +429,8 @@ public class OneCmdManagerScreen extends Screen {
                      DataComponents.LORE,
                      new ItemLore(
                         List.of(
-                           Component.literal("ꜰᴀʏᴄᴏʀᴇ").withStyle(style -> style.withColor(11599765).withItalic(false)),
-                           Component.literal("§7Made by §cFayeCruz").withStyle(style -> style.withItalic(false))
+                           Component.literal("ᴄʜᴜɴᴋɪɪꜰᴏʟᴅᴇʀ").withStyle(style -> style.withColor(11599765).withItalic(false)),
+                           Component.literal("§7Made by §cChunkiifolder").withStyle(style -> style.withItalic(false))
                         )
                      )
                   );
@@ -480,8 +480,8 @@ public class OneCmdManagerScreen extends Screen {
                      DataComponents.LORE,
                      new ItemLore(
                         List.of(
-                           Component.literal("ꜰᴀʏᴄᴏʀᴇ").withStyle(style -> style.withColor(11599765).withItalic(false)),
-                           Component.literal("§7Made by §cFayeCruz").withStyle(style -> style.withItalic(false))
+                           Component.literal("ᴄʜᴜɴᴋɪɪꜰᴏʟᴅᴇʀ").withStyle(style -> style.withColor(11599765).withItalic(false)),
+                           Component.literal("§7Made by §cChunkiifolder").withStyle(style -> style.withItalic(false))
                         )
                      )
                   );

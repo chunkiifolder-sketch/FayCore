@@ -168,7 +168,7 @@ public class SkillTracker {
                if (SkillInteractScreen.GunMode != 2) {
                   FayCoreMacroEngine.autoFindAndInjectVCommand(
                      mc,
-                     "item replace entity %player% weapon.offhand with minecraft:crossbow[minecraft:custom_data={Faycore.fakegun:1b},minecraft:charged_projectiles=[{id:\"minecraft:arrow\",count:1,components:{\"minecraft:intangible_projectile\":{}}}],minecraft:unbreakable={},minecraft:item_model=\"minecraft:air\",minecraft:custom_name=\"\",minecraft:lore=[{\"text\":\"Holding Animation\",\"color\":\"blue\"},{\"text\":\"ꜰᴀʏᴄᴏʀᴇ\",\"color\":\"#B0FF95\",italic:false},{\"text\":\"Made by FayeCruz\",\"color\":\"gray\",\"italic\":false}],minecraft:tooltip_display={hidden_components:[\"charged_projectiles\",\"intangible_projectile\",\"custom_data\",\"unbreakable\"]}]"
+                     "item replace entity %player% weapon.offhand with minecraft:crossbow[minecraft:custom_data={Faycore.fakegun:1b},minecraft:charged_projectiles=[{id:\"minecraft:arrow\",count:1,components:{\"minecraft:intangible_projectile\":{}}}],minecraft:unbreakable={},minecraft:item_model=\"minecraft:air\",minecraft:custom_name=\"\",minecraft:lore=[{\"text\":\"Holding Animation\",\"color\":\"blue\"},{\"text\":\"ᴄʜᴜɴᴋɪɪꜰᴏʟᴅᴇʀ\",\"color\":\"#B0FF95\",italic:false},{\"text\":\"Made by Chunkiifolder\",\"color\":\"gray\",\"italic\":false}],minecraft:tooltip_display={hidden_components:[\"charged_projectiles\",\"intangible_projectile\",\"custom_data\",\"unbreakable\"]}]"
                   );
                   FayCoreMacroEngine.autoFindAndInjectVCommand(
                      mc, "execute as @e[tag=Faycore.gun.main] at %player% positioned ^ ^-0.5 ^0.5 run tp @s ~ ~1.75 ~"
@@ -179,7 +179,7 @@ public class SkillTracker {
                } else {
                   FayCoreMacroEngine.autoFindAndInjectVCommand(
                      mc,
-                     "item replace entity %player% weapon.offhand with minecraft:paper[minecraft:custom_data={Faycore.fakegun:1b},minecraft:unbreakable={},minecraft:item_model=\"minecraft:air\",minecraft:custom_name=\"\",minecraft:lore=[{\"text\":\"Holding Animation\",\"color\":\"blue\"},{\"text\":\"ꜰᴀʏᴄᴏʀᴇ\",\"color\":\"#B0FF95\",italic:false},{\"text\":\"Made by FayeCruz\",\"color\":\"gray\",\"italic\":false}],minecraft:tooltip_display={hidden_components:[\"charged_projectiles\",\"intangible_projectile\",\"custom_data\",\"unbreakable\"]}]"
+                     "item replace entity %player% weapon.offhand with minecraft:paper[minecraft:custom_data={Faycore.fakegun:1b},minecraft:unbreakable={},minecraft:item_model=\"minecraft:air\",minecraft:custom_name=\"\",minecraft:lore=[{\"text\":\"Holding Animation\",\"color\":\"blue\"},{\"text\":\"ᴄʜᴜɴᴋɪɪꜰᴏʟᴅᴇʀ\",\"color\":\"#B0FF95\",italic:false},{\"text\":\"Made by Chunkiifolder\",\"color\":\"gray\",\"italic\":false}],minecraft:tooltip_display={hidden_components:[\"charged_projectiles\",\"intangible_projectile\",\"custom_data\",\"unbreakable\"]}]"
                   );
                   FayCoreMacroEngine.autoFindAndInjectVCommand(
                      mc, "execute as @e[tag=Faycore.RPG.main] at %player% positioned ^-0.25 ^-0.5 ^0.5 run tp @s ~ ~1.75 ~"

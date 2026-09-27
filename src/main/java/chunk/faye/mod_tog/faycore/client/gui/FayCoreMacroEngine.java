@@ -46,8 +46,8 @@ public class FayCoreMacroEngine {
    public static boolean isSingleTriggerLocked = false;
    public static final List<List<BlockPos>> matrixOwnedBlocksCache = new ArrayList<>();
    private static final File CONFIG_FILE = new File(Minecraft.getInstance().gameDirectory, "config/faycore_unlimited_groups.txt");
-   public static String CustomName = "{\"text\":\"ꜰᴀʏᴄᴏʀᴇ\",\"color\":\"#B0FF95\",italic:false}";
-   public static String CustomLore = "{\"minecraft:lore\": [{text:\"Made by FayeCruz\",color:gray,italic:false}]}";
+   public static String CustomName = "{\"text\":\"ᴄʜᴜɴᴋɪɪꜰᴏʟᴅᴇʀ\",\"color\":\"#B0FF95\",italic:false}";
+   public static String CustomLore = "{\"minecraft:lore\": [{text:\"Made by Chunkiifolder\",color:gray,italic:false}]}";
    public static final Map<Integer, Integer> matrixReuseIndex = new HashMap<>();
    private static final ExecutorService FAYCORE_ASYNC_POOL = Executors.newSingleThreadExecutor();
 

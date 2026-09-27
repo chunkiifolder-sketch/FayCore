@@ -49,7 +49,7 @@ releases/                                    # built jars
 
 ## Credits
 
-- FayeCruz, Chunkiifolder
+- Chunkiifolder
 
 ## License
 
