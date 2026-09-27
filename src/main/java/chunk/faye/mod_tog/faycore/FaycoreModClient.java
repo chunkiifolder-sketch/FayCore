@@ -273,7 +273,7 @@ public class FaycoreModClient implements ClientModInitializer {
             return true;
          }
          String trimmed = command.trim().toLowerCase();
-         if (trimmed.equals("fc") || trimmed.startsWith("fc ")) {
+         if (trimmed.equals("fc") || trimmed.startsWith("fc ") || trimmed.equals("/fc") || trimmed.startsWith("/fc ")) {
             handleFcCommand(trimmed);
             return false;
          }
