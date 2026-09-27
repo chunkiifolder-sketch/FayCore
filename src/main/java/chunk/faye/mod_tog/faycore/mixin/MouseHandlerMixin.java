@@ -1,5 +1,6 @@
 package chunk.faye.mod_tog.faycore.mixin;
 
+import chunk.faye.mod_tog.faycore.SkillInteractScreen;
 import chunk.faye.mod_tog.faycore.SkillState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.MouseHandler;
@@ -26,7 +27,7 @@ public class MouseHandlerMixin {
 
         Minecraft client = Minecraft.getInstance();
 
-        if (client.player == null || client.screen != null) {
+        if (client.player == null || (client.screen != null && !(client.screen instanceof SkillInteractScreen))) {
             return;
         }
 

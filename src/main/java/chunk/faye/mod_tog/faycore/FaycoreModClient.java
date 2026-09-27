@@ -21,6 +21,7 @@ import net.fabricmc.fabric.api.client.message.v1.ClientReceiveMessageEvents;
 import net.fabricmc.fabric.api.client.message.v1.ClientSendMessageEvents;
 import net.fabricmc.fabric.api.client.message.v1.ClientReceiveMessageEvents.AllowGame;
 import net.fabricmc.fabric.api.client.message.v1.ClientSendMessageEvents.AllowChat;
+import net.fabricmc.fabric.api.client.message.v1.ClientSendMessageEvents.AllowCommand;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
@@ -266,6 +267,17 @@ public class FaycoreModClient implements ClientModInitializer {
                return false;
             }
          }
+      });
+      ClientSendMessageEvents.ALLOW_COMMAND.register((AllowCommand)command -> {
+         if (command == null) {
+            return true;
+         }
+         String trimmed = command.trim().toLowerCase();
+         if (trimmed.equals("fc") || trimmed.startsWith("fc ")) {
+            handleFcCommand(trimmed);
+            return false;
+         }
+         return true;
       });
       ClientReceiveMessageEvents.ALLOW_GAME.register((AllowGame)(message, overlay) -> {
          if (message.getContents() instanceof TranslatableContents contents && contents.getKey().equals("advMode.setCommand.success")) {
